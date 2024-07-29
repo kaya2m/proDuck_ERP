@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using FluentValidation.AspNetCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Any;
 
 namespace proDuck.Presentation
 {
@@ -48,6 +50,25 @@ namespace proDuck.Presentation
             .WithOrigins("http://localhost:4200", "https://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()));
+            builder.Services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "proDuck",
+                    Version = "1.0.1",
+                    Description = "<h1>proDuck ERP API</h1>\r\n            <p>proDuck ERP API, bir DuckSolution ürünüdür. proDuck, üretim ve fabrika yönetimi için kapsamlý çözümler sunar.<br> \r\n            Bu yazýlým çözümü, fabrikalar ve üretim merkezleri için verimliliði artýrmayý ve maliyetleri düþürmeyi amaçlamaktadýr. \r\n            <br> Kullanýcý dostu arayüzü ve güçlü analitik araçlarý ile iþletmelerin süreçlerini optimize etmelerine yardýmcý olur.</p>",
+                    Extensions =
+                            {
+                                { "proDuck", new OpenApiObject
+                                    {
+                                        { "url", new OpenApiString("https://example.com/logo.png") },
+                                        { "altText", new OpenApiString("proDuck Logo") }
+                                    }
+                                }
+                            },
+                    
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
