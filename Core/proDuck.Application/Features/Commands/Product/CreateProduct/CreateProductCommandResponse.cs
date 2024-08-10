@@ -1,5 +1,4 @@
-﻿using proDuck.Application.Repositories.ProductInterface;
-using proDuck.Domain.Entities;
+﻿using proDuck.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

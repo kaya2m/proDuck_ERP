@@ -1,4 +1,5 @@
-﻿using System;
+﻿using proDuck.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace proDuck.Application.Abstraction.Services.Authentication
 {
     public interface IInternalAuthentication
     {
-        Task<DTOs.Token> LoginAsync(string userNameOremail, string password);
+        Task<TokenDto> LoginAsync(string userNameOremail, string password);
 
     }
 }

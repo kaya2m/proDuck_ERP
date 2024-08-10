@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using proDuck.Application.DTOs;
 
 namespace proDuck.Infrastructure.Services.Token
 {
@@ -16,10 +17,10 @@ namespace proDuck.Infrastructure.Services.Token
             _configuration = configuration;
         }
 
-        public Application.DTOs.Token CreateAccessToken(int second)
+        public TokenDto CreateAccessToken(int second)
         {
             // Initialize a new Token object
-            Application.DTOs.Token token = new();
+            TokenDto token = new();
 
             // Create a SymmetricSecurityKey using the configured security key
             SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Token:SecurityKey"]));

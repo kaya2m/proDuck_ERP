@@ -8,6 +8,6 @@ namespace proDuck.Domain.Entities
 {
     public class ProductImageFiles : Files
     {
-        public ICollection<Product> Products { get; set; }
+        //public ICollection<Product> Products { get; set; }
     }
 }

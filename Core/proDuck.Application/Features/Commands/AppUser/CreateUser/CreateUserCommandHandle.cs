@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace proDuck.Application.Features.Commands.AppUser.CreateUser
 {
-     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
     {
         readonly IUser _user;
 
@@ -19,7 +19,7 @@ namespace proDuck.Application.Features.Commands.AppUser.CreateUser
 
         public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
         {
-         CreateUserResponse response =   await _user.CreateAsync(new()
+            CreateUserResponse response = await _user.CreateAsync(new()
             {
                 Email = request.Email,
                 FirstName = request.FirstName,

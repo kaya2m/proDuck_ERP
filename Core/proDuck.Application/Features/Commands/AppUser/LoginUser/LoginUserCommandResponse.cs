@@ -15,7 +15,7 @@ namespace proDuck.Application.Features.Commands.AppUser.LoginUser
     public class LoginUserSuccessResponse : LoginUserCommandResponse
     {
 
-        public Token Token { get; set; }
+        public TokenDto Token { get; set; }
     }
 
     public class LoginUserFailResponse : LoginUserCommandResponse

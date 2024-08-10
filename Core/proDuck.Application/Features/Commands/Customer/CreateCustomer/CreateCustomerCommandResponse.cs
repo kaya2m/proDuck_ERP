@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Abstraction.Services.Authentication
+namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
 {
-    public interface IExternalAuthentication
+    public class CreateCustomerCommandResponse
     {
     }
 }

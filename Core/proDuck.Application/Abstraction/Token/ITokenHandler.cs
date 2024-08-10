@@ -1,6 +1,8 @@
-﻿namespace proDuck.Application.Abstraction.Token;
+﻿using proDuck.Application.DTOs;
+
+namespace proDuck.Application.Abstraction.Token;
 
 public interface ITokenHandler  
 {
-    DTOs.Token CreateAccessToken(int second);
+    TokenDto CreateAccessToken(int second);
 }

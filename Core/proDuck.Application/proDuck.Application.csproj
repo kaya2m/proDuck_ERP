@@ -21,4 +21,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\proDuck.Domain\proDuck.Domain.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\Commands\Customer\DeleteCustomer\" />
+	  <Folder Include="Features\Commands\Customer\UpdateCustomer\" />
+	</ItemGroup>
 </Project>

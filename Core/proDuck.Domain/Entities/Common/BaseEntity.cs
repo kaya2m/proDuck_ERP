@@ -10,6 +10,9 @@ namespace proDuck.Domain.Entities.Common
     {
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
-      virtual public DateTime UpdatedDate { get; set; }
+        public bool Status { get; set; }
+        public string UserCreated { get; set; }
+        virtual public DateTime UpdatedDate { get; set; }
+        virtual public string UpdatedUser { get; set; }
     }
 }
