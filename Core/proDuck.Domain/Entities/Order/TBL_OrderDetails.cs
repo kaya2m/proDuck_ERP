@@ -14,12 +14,12 @@ namespace proDuck.Domain.Entities.Order
     {
         public int OrderSequence { get; set; }
         public Guid CustomerId { get; set; }
-        public int OrderId { get; set; }
-        public int OfferId { get; set; }
-        public int OfferDetailId { get; set; }
+        public Guid OrderId { get; set; }
+        public Guid OfferId { get; set; }
+        public Guid OfferDetailId { get; set; }
         public string CustomerOrderNumber { get; set; }
         public string SpecialCode { get; set; }
-        public int ProductCardId { get; set; }
+        public Guid ProductCardId { get; set; }
         public decimal Price { get; set; }
         public decimal CurrencyPrice { get; set; }
         public string CurrencyType { get; set; }

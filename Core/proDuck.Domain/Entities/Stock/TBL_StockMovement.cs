@@ -14,21 +14,21 @@ namespace proDuck.Domain.Entities.Stock
 {
     public class TBL_StockMovement : BaseEntity
     {
-        public int MovementId { get; set; }
-        public int ReturnId { get; set; }
+        public Guid MovementId { get; set; }
+        public Guid ReturnId { get; set; }
         public string MovementType { get; set; }
-        public int PreviousMovementId { get; set; }
+        public Guid PreviousMovementId { get; set; }
         public string PreviousMovementType { get; set; }
         public DateTime PreviousMovementDate { get; set; }
-        public int OrderLineId { get; set; }
+        public Guid OrderDetailId { get; set; }
         public int OrderSequence { get; set; }
         public Guid CustomerId { get; set; }
         public DateTime Deadline { get; set; }
-        public int ProductId { get; set; }
-        public int MachineId { get; set; }
+        public Guid ProductId { get; set; }
+        public Guid MachineId { get; set; }
         public string BarcodeNumber { get; set; }
         public string PalletNumber { get; set; }
-        public int PalletId { get; set; }
+        public Guid PalletId { get; set; }
         public int PalletCount { get; set; }
         public decimal PalletVolume { get; set; }
         public decimal Quantity { get; set; }
@@ -36,12 +36,12 @@ namespace proDuck.Domain.Entities.Stock
         public decimal PalletPrice { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public int WarehouseId { get; set; }
-        public int ShippingBasketId { get; set; }
+        public Guid WarehouseId { get; set; }
+        public Guid ShippingBasketId { get; set; }
         public string ShippingStatus { get; set; }
         public Guid UserId { get; set; }
         public DateTime InsertDate { get; set; }
-        public int SalesRepresentativeId { get; set; }
+        public Guid SalesRepresentativeId { get; set; }
         public bool IsSystemOutside { get; set; }
         public Guid SystemOutsideUserId { get; set; }
 

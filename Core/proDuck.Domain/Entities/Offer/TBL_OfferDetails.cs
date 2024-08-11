@@ -10,8 +10,8 @@ namespace proDuck.Domain.Entities.Offer
 {
     public class TBL_OfferDetails:BaseEntity
     {
-        public int OfferId { get; set; }
-        public int ProductCardId { get; set; }
+        public Guid OfferId { get; set; }
+        public Guid ProductCardId { get; set; }
         public string StockNumber { get; set; }
         public int SerialNumber { get; set; }
         public string SpecialCode { get; set; }

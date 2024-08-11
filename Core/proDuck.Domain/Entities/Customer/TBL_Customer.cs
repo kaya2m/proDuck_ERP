@@ -11,9 +11,9 @@ public class TBL_Customer : BaseEntity
     public string Name { get; set; }
     public int PaymentMethod { get; set; }
     public string CountryCode { get; set; }
-    public int CountryId { get; set; }
-    public int CityId { get; set; }
-    public int TownId { get; set; }
+    public Guid CountryId { get; set; }
+    public Guid CityId { get; set; }
+    public Guid TownId { get; set; }
     public string ContactNumber { get; set; }
     public string ContactNumber2{ get; set; }
     public string Email { get; set; }

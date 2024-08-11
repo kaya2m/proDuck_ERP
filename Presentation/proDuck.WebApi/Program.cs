@@ -54,7 +54,6 @@ namespace proDuck.Presentation
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "proDuck",
                     Version = "1.0.1",
                     Description = "<h1>proDuck ERP API</h1>\r\n            <p>proDuck ERP API, bir DuckSolution ürünüdür. proDuck, üretim ve fabrika yönetimi için kapsamlý çözümler sunar.<br> \r\n            Bu yazýlým çözümü, fabrikalar ve üretim merkezleri için verimliliði artýrmayý ve maliyetleri düþürmeyi amaçlamaktadýr. \r\n            <br> Kullanýcý dostu arayüzü ve güçlü analitik araçlarý ile iþletmelerin süreçlerini optimize etmelerine yardýmcý olur.</p>",
                     Extensions =

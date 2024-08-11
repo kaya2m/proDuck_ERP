@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Repositories.CustomerInterface
+namespace proDuck.Application.Repositories.CustomerInterface;
+
+public interface ICustomerReadRepository : IReadRepository<TBL_Customer>
 {
-    public interface ICustomerReadRepository : IReadRepository<TBL_Customer>
-    {
-    }
 }

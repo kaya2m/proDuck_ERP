@@ -9,15 +9,15 @@ namespace proDuck.Domain.Entities.Offer
     {
         public string Type { get; set; }
         public string OfferNumber { get; set; }
-        public int OrderId { get; set; }
-        public int CustomerId { get; set; }
-        public int VehicleTypeId { get; set; }
-        public int ShippingAddressId { get; set; }
-        public int MeetingId { get; set; }
+        public Guid OrderId { get; set; }
+        public Guid CustomerId { get; set; }
+        public Guid VehicleTypeId { get; set; }
+        public Guid ShippingAddressId { get; set; }
+        public Guid MeetingId { get; set; }
         public string CompanyNumber { get; set; }
         public string PaymentMethod { get; set; }
         public int PaymentTerm { get; set; }
-        public int SalesRepresentativeId { get; set; }
+        public Guid SalesRepresentativeId { get; set; }
         public string ContactPerson { get; set; }
         public string Description { get; set; }
         public string Unit { get; set; }
@@ -27,7 +27,7 @@ namespace proDuck.Domain.Entities.Offer
 
         // Navigation properties
         public TBL_Customer Customer { get; set; }
-        public ICollection<TBL_OfferDetails> OfferDetails { get; set; }
         public TBL_Order Order { get; set; }
+        public ICollection<TBL_OfferDetails> OfferDetails { get; set; }
     }
 }

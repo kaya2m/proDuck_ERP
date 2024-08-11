@@ -64,6 +64,7 @@ namespace proDuck.Persistence.Context
                 .HasOne(o => o.Order)
                 .WithOne(or => or.Offer)
                 .HasForeignKey<TBL_Order>(or => or.OfferId); 
+         
             
             base.OnModelCreating(modelBuilder);
         }
