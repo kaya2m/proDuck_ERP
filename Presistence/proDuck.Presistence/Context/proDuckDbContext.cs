@@ -58,6 +58,14 @@ namespace proDuck.Persistence.Context
             }
             return await base.SaveChangesAsync(cancellationToken);
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TBL_Offer>()
+                .HasOne(o => o.Order)
+                .WithOne(or => or.Offer)
+                .HasForeignKey<TBL_Order>(or => or.OfferId); 
+            
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

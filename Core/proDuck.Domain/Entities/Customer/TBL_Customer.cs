@@ -24,7 +24,7 @@ public class TBL_Customer : BaseEntity
     public string CompanyName { get; set; } 
     public string TaxNumber { get; set; }
     public string TaxOffice { get; set; }
-    public string IDNO { get; set; }
+    public string IdNumber { get; set; }
     public string Notes { get; set; } 
 
     // Navigation properties 

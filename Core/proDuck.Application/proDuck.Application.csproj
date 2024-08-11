@@ -23,7 +23,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Commands\Customer\DeleteCustomer\" />
-	  <Folder Include="Features\Commands\Customer\UpdateCustomer\" />
+	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
+	  <Folder Include="Features\Commands\ShippingAddress\DeleteShippingAddress\" />
+	  <Folder Include="Features\Commands\ShippingAddress\UpdateShippingAddress\" />
 	</ItemGroup>
 </Project>
