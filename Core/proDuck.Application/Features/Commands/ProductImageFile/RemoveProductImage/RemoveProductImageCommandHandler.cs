@@ -28,7 +28,7 @@
 //            if (productImageFile
 //                   != null)
 //                product.ProductImageFiles.Remove(productImageFile);
-//            await _productWriteRepository.SaveAsync();
+//            await _productWriteRepository.SaveChangesAsync();
 //            return new();
 //        }
 //    }

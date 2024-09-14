@@ -16,7 +16,7 @@ namespace proDuck.Presentation.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    [Authorize(AuthenticationSchemes ="Admin")]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class ProductsController : ControllerBase
     {
         readonly IMediator _mediator;
@@ -47,14 +47,14 @@ namespace proDuck.Presentation.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]UpdateProductCommandRequest request)
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommandRequest request)
         {
             await _mediator.Send(request);
             return StatusCode((int)HttpStatusCode.OK);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute]DeleteProductCommandRequest request)
+        public async Task<IActionResult> Delete([FromRoute] DeleteProductCommandRequest request)
         {
             await _mediator.Send(request);
             return Ok(new
@@ -62,12 +62,12 @@ namespace proDuck.Presentation.Controllers
                 message = "silme işlemi başarılı"
             });
         }
-        
+
         [HttpPost("[action]")]
-        public async Task<IActionResult> Upload([FromQuery]UploadProductImageCommandRequest request)
+        public async Task<IActionResult> Upload([FromQuery] UploadProductImageCommandRequest request)
         {
             request.Files = Request.Form.Files;
-           UploadProductImageCommandResponse response= await _mediator.Send(request);
+            UploadProductImageCommandResponse response = await _mediator.Send(request);
             return Ok();
         }
 
@@ -79,9 +79,8 @@ namespace proDuck.Presentation.Controllers
 
         }
 
-
         [HttpDelete("[action]/{id}")]
-          public async Task<IActionResult> DeleteProductImage([FromRoute] RemoveProductImageCommandRequest removeProductImageCommandRequest, [FromQuery] string imageId)
+        public async Task<IActionResult> DeleteProductImage([FromRoute] RemoveProductImageCommandRequest removeProductImageCommandRequest, [FromQuery] string imageId)
         {
             removeProductImageCommandRequest.ImageId = imageId;
             RemoveProductImageCommandResponse response = await _mediator.Send(removeProductImageCommandRequest);

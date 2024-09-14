@@ -25,7 +25,7 @@
 //            product.Stock = request.Stock;
 //            product.Price = request.Price;
 //            product.Name = request.Name;
-//            await _productWriteRepository.SaveAsync();
+//            await _productWriteRepository.SaveChangesAsync();
 //            return new();
 //        }
 //    }

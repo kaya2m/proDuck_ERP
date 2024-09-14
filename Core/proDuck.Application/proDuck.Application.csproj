@@ -26,5 +26,14 @@
 	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\DeleteShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\UpdateShippingAddress\" />
+	  <Folder Include="Features\Queries\Machine\GetAllMachine\" />
+	  <Folder Include="Features\Queries\Machine\GetByIdMachine\" />
+	  <Folder Include="Features\Queries\Offer\GetAllOffer\" />
+	  <Folder Include="Features\Queries\Offer\GetByIdOffer\" />
+	  <Folder Include="Features\Queries\Offer\GetByIdOfferDetail\" />
+	  <Folder Include="Features\Queries\Offer\GetAllOrderDetail\" />
+	  <Folder Include="Features\Queries\ProductCard\GetAllProductCard\" />
+	  <Folder Include="Features\Queries\ProductCard\GetByIdProductCard\" />
+	  <Folder Include="Features\Queries\ShippingAddress\GetByIdShippingAddress\" />
 	</ItemGroup>
 </Project>

@@ -9,5 +9,6 @@ namespace proDuck.Application.Features.Commands.Customer.DeleteCustomer
 {
     public class DeleteCustomerCommandRequest : IRequest<DeleteCustomerCommandResponse>
     {
+        public Guid id { get; set; }
     }
 }

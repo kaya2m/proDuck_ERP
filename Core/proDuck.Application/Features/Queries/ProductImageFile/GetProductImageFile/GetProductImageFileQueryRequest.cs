@@ -9,6 +9,6 @@ namespace proDuck.Application.Features.Queries.ProductImageFile.GetProductImageF
 {
     public class GetProductImageFileQueryRequest : IRequest<List<GetProductImageFileQueryResponse>>
     {
-        public string id { get; set; }
+        public Guid id { get; set; }
     }
 }

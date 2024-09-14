@@ -22,7 +22,7 @@
 //        public async Task<DeleteProductCommandResponse> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
 //        {
 //            await _productWriteRepository.Remove(request.id);
-//            await _productWriteRepository.SaveAsync();
+//            await _productWriteRepository.SaveChangesAsync();
 //            return new();
 //        }
 //    }

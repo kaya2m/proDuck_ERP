@@ -15,6 +15,10 @@ using proDuck.Application.Abstraction.Services;
 using proDuck.Persistence.Services;
 using proDuck.Application.Abstraction.Services.Authentication;
 using proDuck.Presistence.Repositories.CustomerRepositories;
+using proDuck.Application.Repositories.OrderInterface;
+using proDuck.Presistence.Repositories.OrderRepositories;
+using proDuck.Application.Repositories.ShippingAddressInterface;
+using proDuck.Presistence.Repositories.ShippingAddressRepositories;
 
 namespace proDuck.Persistence
 {
@@ -34,10 +38,12 @@ namespace proDuck.Persistence
 
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
-            //services.AddScoped<IOrderReadRepository, OrderReadRepository>();
-            //services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
-            //services.AddScoped<IProductReadRepository, ProductReadRepository>();
-            //services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            //services.AddScoped<IProductCardReadRepository, ProductCardReadRepository>();
+            //services.AddScoped<IProductCardWriteRepository, ProductCardWriteRepository>();
+            services.AddScoped<IShippingAddressReadRepository, ShippingAddressReadRepository>();
+            services.AddScoped<IShippingAddressWriteRepository, ShippingAddressWriteRepository>();
 
             //services.AddScoped<IFileReadRepository, FileReadRepository>();
             services.AddScoped<IFileWriteRepository, FileWriteRespository>();

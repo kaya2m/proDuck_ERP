@@ -2,58 +2,64 @@
 using proDuck.Domain.Entities.Common;
 using proDuck.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace proDuck.Persistence.Repositories
+namespace proDuck.Persistence.Repositories;
+
+public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
 {
-    public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
+    private readonly proDuckDbContext _dbContext;
+
+    public ReadRepository(proDuckDbContext dbContext)
     {
-        private readonly proDuckDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public ReadRepository(proDuckDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    DbSet<T> Table => _dbContext.Set<T>();
 
-        DbSet<T> Table => _dbContext.Set<T>();
+    DbSet<T> IRepository<T>.Table => _dbContext.Set<T>();
 
-        DbSet<T> IRepository<T>.Table => _dbContext.Set<T>();
+    public IQueryable<T> GetAll(bool tracking = true)
+    {
+        var query = Table.AsQueryable();
+        if (!tracking)
+            query = query.AsNoTracking();
+        return query;
+    }
 
-        public IQueryable<T> GetAll(bool tracking = true)
-        {
-            var query = Table.AsQueryable();
-            if(!tracking)
-                query= query.AsNoTracking();
-            return query;
-        }
+    public async Task<IQueryable<T>> GetAllAsync(bool tracking = true)
+    {
+        var query = await Task.Run(() => GetAll(tracking));
+        return query;
+    }
 
-        public async Task<T> GetByIdAsync(string id, bool tracking = true)
-        {
-            var query = Table.AsQueryable();
-            if (!tracking)
-                query = query.AsNoTracking();
-            return await query.FirstOrDefaultAsync(x=>x.Id==Guid.Parse(id));
-        }
+    public async Task<T> GetByIdAsync(Guid id, bool tracking = true)
+    {
+        var query = Table.AsQueryable();
+        if (!tracking)
+            query = query.AsNoTracking();
+        return await query.FirstOrDefaultAsync(x => x.Id == id);
+    }
 
-        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, bool tracking = true)
-        {
-           var query = Table.AsQueryable();
-            if(!tracking)
-                query = query.AsNoTracking();
-            return await query.FirstOrDefaultAsync();
-        }
+    public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, bool tracking = true)
+    {
+        var query = Table.AsQueryable();
+        if (!tracking)
+            query = query.AsNoTracking();
+        return await query.FirstOrDefaultAsync(predicate);
+    }
 
-        public IQueryable<T> GetWhere(Expression<Func<T, bool>> predicate, bool tracking = true)
-        {
-            var query =  Table.Where(predicate);
-            if(!tracking)
-                query = query.AsNoTracking();
-            return query;
-        }
+    public IQueryable<T> GetWhere(Expression<Func<T, bool>> predicate, bool tracking = true)
+    {
+        var query = Table.Where(predicate);
+        if (!tracking)
+            query = query.AsNoTracking();
+        return query;
+    }
+
+    public async Task<IQueryable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate, bool tracking = true)
+    {
+        var query = await Task.Run(() => GetWhere(predicate, tracking));
+        return query;
     }
 }

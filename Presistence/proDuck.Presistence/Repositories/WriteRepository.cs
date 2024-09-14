@@ -2,60 +2,64 @@
 using proDuck.Domain.Entities.Common;
 using proDuck.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace proDuck.Persistence.Repositories;
 
-namespace proDuck.Persistence.Repositories
+public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
 {
-    public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
+    private readonly proDuckDbContext _dbContext;
+
+    public WriteRepository(proDuckDbContext dbContext)
     {
-        private readonly proDuckDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public WriteRepository(proDuckDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public DbSet<T> Table => _dbContext.Set<T>();
 
-        public DbSet<T> Table => _dbContext.Set<T>();
+    public async Task<bool> AddAsync(T entity)
+    {
+        await Table.AddAsync(entity);
+        return await SaveChangesAsync() > 0;
+    }
 
-        public async Task<bool> AddAsync(T entity)
-        {
-            EntityEntry<T> entityEntry = await Table.AddAsync(entity);
-            return entityEntry.State == EntityState.Added;
-        }
+    public async Task<bool> AddRangeAsync(IEnumerable<T> entities)
+    {
+        await Table.AddRangeAsync(entities);
+        return await SaveChangesAsync() > 0;
+    }
 
-        public async Task<bool> AddRangeAsync(List<T> entity)
-        {
-           await Table.AddRangeAsync(entity);
-            return true;
-        }
-        public bool Update(T entity)
-        {
-            EntityEntry<T> entityEntry = Table.Update(entity);
-            return entityEntry.State == EntityState.Modified;
-        }
-        public bool Remove(T entity)
-        {
-            EntityEntry<T> entityEntry =  Table.Remove(entity);
-            return entityEntry.State == EntityState.Deleted;
-        }
-        public bool RemoveRange(List<T> entity)
-        {
-            Table.RemoveRange(entity);
-            return true;
-        }
-        public async Task<bool> Remove(string id)
-        {
-         T entity= await Table.FirstOrDefaultAsync(Table => Table.Id == Guid.Parse(id));
-           return Remove(entity);
-        }
+    public bool Update(T entity)
+    {
+        Table.Update(entity);
+        return SaveChanges() > 0;
+    }
 
-        public async Task<int> SaveAsync()
-        => await _dbContext.SaveChangesAsync();
+    public bool Remove(T entity)
+    {
+        Table.Remove(entity);
+        return SaveChanges() > 0;
+    }
 
+    public bool RemoveRange(IEnumerable<T> entities)
+    {
+        Table.RemoveRange(entities);
+        return SaveChanges() > 0;
+    }
+
+    public async Task<bool> RemoveAsync(Guid id)
+    {
+        var entity = await Table.FindAsync(id);
+        if (entity == null) return false;
+        Table.Remove(entity);
+        return await SaveChangesAsync() > 0;
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        return await _dbContext.SaveChangesAsync();
+    }
+
+    public int SaveChanges()
+    {
+        return _dbContext.SaveChanges();
     }
 }

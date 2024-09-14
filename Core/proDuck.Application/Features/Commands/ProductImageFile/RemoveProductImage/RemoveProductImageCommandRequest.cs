@@ -9,7 +9,7 @@ namespace proDuck.Application.Features.Commands.ProductImageFile.RemoveProductIm
 {
     public class RemoveProductImageCommandRequest : IRequest<RemoveProductImageCommandResponse>
     {
-        public string Id { get; set; }
+        public Guid id { get; set; }
         public string ImageId { get; set; }
     }
 }

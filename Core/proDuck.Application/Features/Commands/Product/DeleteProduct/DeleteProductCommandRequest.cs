@@ -9,6 +9,6 @@ namespace proDuck.Application.Features.Commands.Product.DeleteProduct
 {
     public class DeleteProductCommandRequest :IRequest<DeleteProductCommandResponse>
     {
-        public string id { get; set; }
+        public Guid id { get; set; }
     }
 }

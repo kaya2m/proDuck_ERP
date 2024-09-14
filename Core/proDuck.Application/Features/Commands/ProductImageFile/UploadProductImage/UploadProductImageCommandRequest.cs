@@ -10,6 +10,6 @@ namespace proDuck.Application.Features.Commands.ProductImageFile.UploadProductIm
 
 public class UploadProductImageCommandRequest : IRequest<UploadProductImageCommandResponse>
 {
-    public string Id { get; set; }
+    public Guid id { get; set; }
     public IFormFileCollection Files { get; set; }
 }
