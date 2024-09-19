@@ -9,5 +9,6 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.DeleteOfferDet
 {
     public class DeleteOfferDetailCommandRequest : IRequest<DeleteOfferDetailCommandResponse>
     {
+        public Guid id { get; set; }
     }
 }

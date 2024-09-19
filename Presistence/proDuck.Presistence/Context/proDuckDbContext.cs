@@ -63,9 +63,28 @@ namespace proDuck.Persistence.Context
             modelBuilder.Entity<TBL_Offer>()
                 .HasOne(o => o.Order)
                 .WithOne(or => or.Offer)
-                .HasForeignKey<TBL_Order>(or => or.OfferId); 
-         
-            
+                .HasForeignKey<TBL_Order>(or => or.OfferId);
+
+            //modelBuilder.Entity<TBL_Customer>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_ShippingAddress>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Machine>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Offer>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_OfferDetails>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_OfferMeeting>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_PaymentType>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_SalesType>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_VehicleType>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Order>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_OrderDetails>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Category>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_ModelType>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Pallet>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_ProductCard>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_UnitOfMeasure>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_SalesRepresentative>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_StockMovement>().HasQueryFilter(u => !u.Status);
+            //modelBuilder.Entity<TBL_Warehouse>().HasQueryFilter(u => !u.Status);
+
             base.OnModelCreating(modelBuilder);
         }
     }

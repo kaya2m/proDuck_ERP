@@ -3,12 +3,12 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using proDuck.Application.Features.Commands.Order.CreateOrder;
-using proDuck.Application.Features.Commands.Order.DeleteOrder;
-using proDuck.Application.Features.Commands.Order.UpdateOrder;
-using proDuck.Application.Features.Queries.Order.GetAllOrder;
-using proDuck.Application.Features.Queries.Order.GetByIdOrder;
 using static Google.Apis.Requests.BatchRequest;
+using proDuck.Application.Features.Commands.Order.Order.CreateOrder;
+using proDuck.Application.Features.Commands.Order.Order.DeleteOrder;
+using proDuck.Application.Features.Commands.Order.Order.UpdateOrder;
+using proDuck.Application.Features.Queries.Order.Order.GetAllOrder;
+using proDuck.Application.Features.Queries.Order.Order.GetByIdOrder;
 
 namespace proDuck.WebApi.Controllers;
 

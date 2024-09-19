@@ -9,5 +9,12 @@ namespace proDuck.Application.Features.Commands.Offer.Meeting.UpdateMeeting
 {
     public class UpdateMeetingCommandRequest : IRequest<UpdateMeetingCommandResponse>
     {
+        public Guid id { get; set; }
+        public Guid   CustomerId { get; set; }
+        public string CommunicationType { get; set; }
+        public string CustomerContactPerson { get; set; }
+        public string CustomerContactEmail { get; set; }
+        public string CustomerContactPhone { get; set; }
+        public string Notes { get; set; }
     }
 }

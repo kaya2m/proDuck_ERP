@@ -1,13 +1,4 @@
-﻿using entity = proDuck.Domain.Entities.Identity;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using proDuck.Application.Exceptions;
-using proDuck.Application.Abstraction.Token;
+﻿using MediatR;
 using proDuck.Application.DTOs;
 using proDuck.Application.Abstraction.Services;
 

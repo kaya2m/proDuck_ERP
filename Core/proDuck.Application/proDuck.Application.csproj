@@ -6,6 +6,12 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+    <EmbeddedResource Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+    <None Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.9.2" />
 		<PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
@@ -25,15 +31,15 @@
 	<ItemGroup>
 	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\DeleteShippingAddress\" />
+	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
+	  <Folder Include="Features\Commands\ShippingAddress\DeleteShippingAddress\" />
+	  <Folder Include="Features\Commands\ShippingAddress\UpdateShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\UpdateShippingAddress\" />
 	  <Folder Include="Features\Queries\Machine\GetAllMachine\" />
 	  <Folder Include="Features\Queries\Machine\GetByIdMachine\" />
-	  <Folder Include="Features\Queries\Offer\GetAllOffer\" />
-	  <Folder Include="Features\Queries\Offer\GetByIdOffer\" />
-	  <Folder Include="Features\Queries\Offer\GetByIdOfferDetail\" />
-	  <Folder Include="Features\Queries\Offer\GetAllOrderDetail\" />
 	  <Folder Include="Features\Queries\ProductCard\GetAllProductCard\" />
 	  <Folder Include="Features\Queries\ProductCard\GetByIdProductCard\" />
+	  <Folder Include="Features\Queries\ShippingAddress\GetByIdShippingAddress\" />
 	  <Folder Include="Features\Queries\ShippingAddress\GetByIdShippingAddress\" />
 	</ItemGroup>
 </Project>

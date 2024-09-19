@@ -1,5 +1,4 @@
 ﻿using proDuck.Domain.Entities.Common;
-using proDuck.Domain.Entities.Product;
 using proDuck.Domain.Entities.ProductCard;
 using System;
 
@@ -7,8 +6,6 @@ namespace proDuck.Domain.Entities.Offer
 {
     public class TBL_OfferDetails : BaseEntity
     {
-        public string StockNumber { get; set; }
-        public int SerialNumber { get; set; }
         public string SpecialCode { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Amount { get; set; }

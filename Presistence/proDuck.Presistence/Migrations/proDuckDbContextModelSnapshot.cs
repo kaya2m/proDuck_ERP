@@ -140,8 +140,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Address2")
                         .HasColumnType("text");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CityId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Code")
                         .HasColumnType("text");
@@ -158,8 +158,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("CountryCode")
                         .HasColumnType("text");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
@@ -168,9 +168,6 @@ namespace proDuck.Presistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Email2")
-                        .HasColumnType("text");
-
-                    b.Property<string>("IdNumber")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -194,8 +191,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("TaxOffice")
                         .HasColumnType("text");
 
-                    b.Property<int>("TownId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("TownId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -204,6 +201,9 @@ namespace proDuck.Presistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idNumber")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -480,10 +480,7 @@ namespace proDuck.Presistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("CustomerId1")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
@@ -495,14 +492,14 @@ namespace proDuck.Presistence.Migrations
                     b.Property<decimal>("DiscountedTotalAmount")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("MeetingId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("MeetingId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("OfferNumber")
                         .HasColumnType("text");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("text");
@@ -510,23 +507,20 @@ namespace proDuck.Presistence.Migrations
                     b.Property<int>("PaymentTerm")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SalesRepresentativeId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PaymentTypeId")
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("ShippingAddressId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("SalesRepresentativeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SalesTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ShippingAddressId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
-
-                    b.Property<Guid?>("TBL_SalesRepresentativeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("TBL_ShippingAddressId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("TBL_VehicleTypeId")
-                        .HasColumnType("uuid");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("numeric");
@@ -546,18 +540,24 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("UserCreated")
                         .HasColumnType("text");
 
-                    b.Property<int>("VehicleTypeId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("VehicleTypeId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
-                    b.HasIndex("TBL_SalesRepresentativeId");
+                    b.HasIndex("MeetingId");
 
-                    b.HasIndex("TBL_ShippingAddressId");
+                    b.HasIndex("PaymentTypeId");
 
-                    b.HasIndex("TBL_VehicleTypeId");
+                    b.HasIndex("SalesRepresentativeId");
+
+                    b.HasIndex("SalesTypeId");
+
+                    b.HasIndex("ShippingAddressId");
+
+                    b.HasIndex("VehicleTypeId");
 
                     b.ToTable("Offer");
                 });
@@ -592,22 +592,13 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
-                    b.Property<int>("OfferId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("OfferId1")
+                    b.Property<Guid>("OfferId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ProductCardId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("ProductCardId1")
+                    b.Property<Guid>("ProductCardId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SerialNumber")
                         .HasColumnType("integer");
 
                     b.Property<string>("SpecialCode")
@@ -615,9 +606,6 @@ namespace proDuck.Presistence.Migrations
 
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("StockNumber")
-                        .HasColumnType("text");
 
                     b.Property<string>("Unit")
                         .HasColumnType("text");
@@ -636,9 +624,9 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfferId1");
+                    b.HasIndex("OfferId");
 
-                    b.HasIndex("ProductCardId1");
+                    b.HasIndex("ProductCardId");
 
                     b.ToTable("OfferDetails");
                 });
@@ -832,6 +820,9 @@ namespace proDuck.Presistence.Migrations
                     b.Property<Guid>("OfferId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("OrderName")
+                        .HasColumnType("text");
+
                     b.Property<string>("OrderNumber")
                         .HasColumnType("text");
 
@@ -847,8 +838,14 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("SalesType")
                         .HasColumnType("text");
 
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("text");
+
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("StockNumber")
+                        .HasColumnType("text");
 
                     b.Property<string>("SubPaymentMethod")
                         .HasColumnType("text");
@@ -936,19 +933,13 @@ namespace proDuck.Presistence.Migrations
                     b.Property<int>("LoadingQuantity")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OfferDetailId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("OfferId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("OfferId1")
+                    b.Property<Guid>("OfferDetailId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid?>("OrderId1")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("OrderSequence")
@@ -960,10 +951,7 @@ namespace proDuck.Presistence.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ProductCardId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("ProductCardId1")
+                    b.Property<Guid>("ProductCardId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("ProductSalesUnitPrice")
@@ -1012,11 +1000,11 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("OfferId1");
+                    b.HasIndex("OfferId");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductCardId1");
+                    b.HasIndex("ProductCardId");
 
                     b.HasIndex("ShippingAddressId");
 
@@ -1293,22 +1281,94 @@ namespace proDuck.Presistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AvailabilityNotes")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("Department")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("EmergencyContactName")
                         .HasColumnType("text");
+
+                    b.Property<string>("EmergencyContactPhone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EmployeeCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsAvailableForContact")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LinkedInProfile")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MonthlyTarget")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfClients")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("OfficeLocation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuarterlyTarget")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Surname")
+                    b.Property<string>("Territory")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("TotalCommission")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("TotalRevenue")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("TotalSales")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TwitterHandle")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -1319,6 +1379,9 @@ namespace proDuck.Presistence.Migrations
 
                     b.Property<string>("UserCreated")
                         .HasColumnType("text");
+
+                    b.Property<int>("YearlyTarget")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -1355,20 +1418,17 @@ namespace proDuck.Presistence.Migrations
                     b.Property<bool>("IsSystemOutside")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("MachineId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("MachineId1")
+                    b.Property<Guid>("MachineId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("MovementId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("MovementId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("MovementType")
                         .HasColumnType("text");
 
-                    b.Property<int>("OrderLineId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("OrderDetailId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("OrderSequence")
                         .HasColumnType("integer");
@@ -1376,8 +1436,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<int>("PalletCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PalletId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PalletId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PalletNumber")
                         .HasColumnType("text");
@@ -1391,8 +1451,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<DateTime>("PreviousMovementDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("PreviousMovementId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PreviousMovementId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PreviousMovementType")
                         .HasColumnType("text");
@@ -1403,23 +1463,20 @@ namespace proDuck.Presistence.Migrations
                     b.Property<Guid?>("ProductCardId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ReturnId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SalesRepresentativeId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("SalesRepresentativeId1")
+                    b.Property<Guid>("ReturnId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ShippingBasketId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("SalesRepresentativeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ShippingBasketId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ShippingStatus")
                         .HasColumnType("text");
@@ -1442,23 +1499,20 @@ namespace proDuck.Presistence.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("WarehouseId1")
+                    b.Property<Guid>("WarehouseId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("MachineId1");
+                    b.HasIndex("MachineId");
 
                     b.HasIndex("ProductCardId");
 
-                    b.HasIndex("SalesRepresentativeId1");
+                    b.HasIndex("SalesRepresentativeId");
 
-                    b.HasIndex("WarehouseId1");
+                    b.HasIndex("WarehouseId");
 
                     b.ToTable("StockMovements");
                 });
@@ -1583,7 +1637,7 @@ namespace proDuck.Presistence.Migrations
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", b =>
                 {
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
-                        .WithMany()
+                        .WithMany("ShippingAddresses")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1595,32 +1649,74 @@ namespace proDuck.Presistence.Migrations
                 {
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
                         .WithMany("Offer")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", null)
+                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_OfferMeeting", "Meeting")
+                        .WithMany()
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_PaymentType", "PaymentType")
                         .WithMany("Offers")
-                        .HasForeignKey("TBL_SalesRepresentativeId");
+                        .HasForeignKey("PaymentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", null)
-                        .WithMany("Offer")
-                        .HasForeignKey("TBL_ShippingAddressId");
+                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "SalesRepresentative")
+                        .WithMany("Offers")
+                        .HasForeignKey("SalesRepresentativeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_VehicleType", null)
+                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_SalesType", "SalesType")
+                        .WithMany("Offers")
+                        .HasForeignKey("SalesTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", "ShippingAddress")
                         .WithMany("Offer")
-                        .HasForeignKey("TBL_VehicleTypeId");
+                        .HasForeignKey("ShippingAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_VehicleType", "VehicleType")
+                        .WithMany("Offers")
+                        .HasForeignKey("VehicleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Meeting");
+
+                    b.Navigation("PaymentType");
+
+                    b.Navigation("SalesRepresentative");
+
+                    b.Navigation("SalesType");
+
+                    b.Navigation("ShippingAddress");
+
+                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_OfferDetails", b =>
                 {
                     b.HasOne("proDuck.Domain.Entities.Offer.TBL_Offer", "Offer")
                         .WithMany("OfferDetails")
-                        .HasForeignKey("OfferId1");
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", "ProductCard")
                         .WithMany("OfferDetails")
-                        .HasForeignKey("ProductCardId1");
+                        .HasForeignKey("ProductCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Offer");
 
@@ -1687,15 +1783,21 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasOne("proDuck.Domain.Entities.Offer.TBL_Offer", "Offer")
                         .WithMany()
-                        .HasForeignKey("OfferId1");
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.Order.TBL_Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", "ProductCard")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("ProductCardId1");
+                        .HasForeignKey("ProductCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", "ShippingAddress")
                         .WithMany()
@@ -1779,7 +1881,9 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasOne("proDuck.Domain.Entities.Machine.TBL_Machine", "Machine")
                         .WithMany()
-                        .HasForeignKey("MachineId1");
+                        .HasForeignKey("MachineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", "ProductCard")
                         .WithMany()
@@ -1787,11 +1891,15 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "SalesRepresentative")
                         .WithMany()
-                        .HasForeignKey("SalesRepresentativeId1");
+                        .HasForeignKey("SalesRepresentativeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("proDuck.Domain.Entities.Stock.TBL_Warehouse", "Warehouse")
                         .WithMany("StockMovements")
-                        .HasForeignKey("WarehouseId1");
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -1809,6 +1917,8 @@ namespace proDuck.Presistence.Migrations
                     b.Navigation("Offer");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("ShippingAddresses");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", b =>
@@ -1825,9 +1935,19 @@ namespace proDuck.Presistence.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_PaymentType", b =>
+                {
+                    b.Navigation("Offers");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_SalesType", b =>
+                {
+                    b.Navigation("Offers");
+                });
+
             modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_VehicleType", b =>
                 {
-                    b.Navigation("Offer");
+                    b.Navigation("Offers");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_Category", b =>

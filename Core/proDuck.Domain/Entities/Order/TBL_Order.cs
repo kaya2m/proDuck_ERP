@@ -13,9 +13,12 @@ namespace proDuck.Domain.Entities.Order
 {
     public class TBL_Order : BaseEntity
     {
+        public string OrderName { get; set; }
         public string OrderNumber { get; set; }
         public Guid OfferId { get; set; }
         public Guid CustomerId { get; set; }
+        public string StockNumber { get; set; }
+        public string SerialNumber { get; set; }
         public string CustomerCode { get; set; }
         public string PaymentMethod { get; set; }
         public string SubPaymentMethod { get; set; }

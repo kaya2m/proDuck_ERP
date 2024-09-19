@@ -1,17 +1,43 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
 
-namespace proDuck.Application.Features.Commands.Offer.Meeting.DeleteMeeting
+namespace proDuck.Application.Features.Commands.Offer.Meeting.DeleteMeeting;
+
+public class DeleteMeetingCommandHandler : IRequestHandler<DeleteMeetingCommandRequest, DeleteMeetingCommandResponse>
 {
-    public class DeleteMeetingCommandHandler : IRequestHandler<DeleteMeetingCommandRequest, DeleteMeetingCommandResponse>
+    private readonly IMeetingWriteRepository _meetingWriteRepository;
+    private readonly IMeetingReadRepository _meetingReadRepository;
+
+    public DeleteMeetingCommandHandler(IMeetingWriteRepository meetingWriteRepository, IMeetingReadRepository meetingReadRepository)
     {
-        public Task<DeleteMeetingCommandResponse> Handle(DeleteMeetingCommandRequest request, CancellationToken cancellationToken)
+        _meetingWriteRepository = meetingWriteRepository;
+        _meetingReadRepository = meetingReadRepository;
+    }
+
+    public async Task<DeleteMeetingCommandResponse> Handle(DeleteMeetingCommandRequest request, CancellationToken cancellationToken)
+    {
+        try
         {
-            throw new NotImplementedException();
+            var meetingInfo = _meetingReadRepository.GetByIdAsync(request.id).Result;
+            meetingInfo.Status = false;
+            _meetingWriteRepository.Update(meetingInfo);
+            var meeting = await _meetingWriteRepository.SaveChangesAsync();
+            return new DeleteMeetingCommandResponse
+            {
+                Message = "Meeting deleted successfully",
+                IsSuccessful = true,
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+        catch (Exception ex)
+        {
+            return new DeleteMeetingCommandResponse
+            {
+                Message = ex.Message,
+                IsSuccessful = false,
+                StatusCode = ex.HResult
+            };
         }
     }
 }

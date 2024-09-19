@@ -9,5 +9,6 @@ namespace proDuck.Application.Features.Commands.Offer.Meeting.DeleteMeeting
 {
     public class DeleteMeetingCommandRequest : IRequest<DeleteMeetingCommandResponse>
     {
+        public Guid id { get; set; }
     }
 }
