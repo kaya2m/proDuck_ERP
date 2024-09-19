@@ -2,14 +2,10 @@
 using proDuck.Domain.Entities.Customer;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.Offer
 {
-    public class TBL_OfferMeeting :BaseEntity
+    public class TBL_OfferMeeting : BaseEntity
     {
         public Guid CustomerId { get; set; }
         public string CommunicationType { get; set; }
@@ -20,7 +16,7 @@ namespace proDuck.Domain.Entities.Offer
         public string Notes { get; set; }
 
         // Navigation properties
-        public TBL_Customer Customer { get; set; }
-        public TBL_SalesRepresentative CustomerRepresentative { get; set; }
+        public virtual TBL_Customer Customer { get; set; }
+        public virtual TBL_SalesRepresentative CustomerRepresentative { get; set; }
     }
 }

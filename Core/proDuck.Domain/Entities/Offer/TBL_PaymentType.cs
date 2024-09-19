@@ -1,9 +1,6 @@
 ﻿using proDuck.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.Offer
 {
@@ -11,5 +8,8 @@ namespace proDuck.Domain.Entities.Offer
     {
         public string Type { get; set; }
         public string Description { get; set; }
+
+        // Navigation properties
+        public virtual ICollection<TBL_Offer> Offers { get; set; }
     }
 }

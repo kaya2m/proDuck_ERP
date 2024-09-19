@@ -1,17 +1,12 @@
 ﻿using proDuck.Domain.Entities.Common;
+using proDuck.Domain.Entities.Product;
 using proDuck.Domain.Entities.ProductCard;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.Offer
 {
-    public class TBL_OfferDetails:BaseEntity
+    public class TBL_OfferDetails : BaseEntity
     {
-        public Guid OfferId { get; set; }
-        public Guid ProductCardId { get; set; }
         public string StockNumber { get; set; }
         public int SerialNumber { get; set; }
         public string SpecialCode { get; set; }
@@ -27,7 +22,10 @@ namespace proDuck.Domain.Entities.Offer
         public DateTime Date { get; set; }
 
         // Navigation properties
-        public TBL_Offer Offer { get; set; }
-        public TBL_ProductCard ProductCard { get; set; }
+        public Guid OfferId { get; set; }
+        public virtual TBL_Offer Offer { get; set; }
+
+        public Guid ProductCardId { get; set; }
+        public virtual TBL_ProductCard ProductCard { get; set; }
     }
 }

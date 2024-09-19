@@ -11,7 +11,6 @@ namespace proDuck.Domain.Entities.Customer
 {
     public class TBL_ShippingAddress : BaseEntity
     {
-        public Guid CustomerId { get; set; }
         public string AccountName { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -25,6 +24,7 @@ namespace proDuck.Domain.Entities.Customer
         public string EmailAddress { get; set; }
 
         // Navigation properties
+        public Guid CustomerId { get; set; }
         public TBL_Customer Customer { get; set; }
         public ICollection<TBL_Offer> Offer { get; set; }
         public ICollection<TBL_Order> Order { get; set; }
