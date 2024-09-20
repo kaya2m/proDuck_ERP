@@ -8,7 +8,7 @@ namespace proDuck.Application.Exceptions
 {
     public class NotFoundUserException : Exception
     {
-        public NotFoundUserException()
+        public NotFoundUserException() : base("Invalid login credentials")
         {
         }
 

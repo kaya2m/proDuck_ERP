@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace proDuck.Application.Exceptions
 {
-    public class AuthenticationErrorExcepiton : Exception
+   public class AuthenticationErrorExcepiton : Exception
     {
-        public AuthenticationErrorExcepiton(string message) : base("Kimlik doğrulam hatası")
+        public AuthenticationErrorExcepiton() : base("Authentication failed")
         {
+        }
 
+        public AuthenticationErrorExcepiton(string message) : base(message)
+        {
         }
 
         public AuthenticationErrorExcepiton(string message, Exception innerException) : base(message, innerException)

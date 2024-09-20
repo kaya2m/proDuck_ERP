@@ -52,22 +52,25 @@ namespace proDuck.Persistence.Services
             }
             throw new Exception("Invalid external authentication.");
         }
-        public async Task<TokenDto> LoginAsync(string userNameOremail, string password)
+        public async Task<TokenDto> LoginAsync(string userNameOrEmail, string password)
         {
-            AppUser user = await _userManager.FindByNameAsync(userNameOremail);
-            if (user == null)
-                user = await _userManager.FindByEmailAsync(userNameOremail);
+            AppUser user = await _userManager.FindByNameAsync(userNameOrEmail)
+                           ?? await _userManager.FindByEmailAsync(userNameOrEmail);
 
             if (user == null)
-                throw new NotFoundUserException();
+                throw new NotFoundUserException("Invalid login credentials");
 
             SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
-            if (result.Succeeded) //Authentication başarılı!
+
+            if (!result.Succeeded)
             {
-                TokenDto token = _tokenHandler.CreateAccessToken(15000);
-                return token;
+                throw new AuthenticationErrorExcepiton("Invalid login credentials"); 
             }
-            throw new AuthenticationErrorExcepiton("Kullanıcı bulunamadı");
+
+            TokenDto token = _tokenHandler.CreateAccessToken(15000);
+
+            return token;
         }
+
     }
 }

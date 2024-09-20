@@ -26,6 +26,14 @@ using proDuck.Application.Repositories.OrderInterface.Order;
 using proDuck.Presistence.Repositories.OrdersRepositories.OrderRepositories;
 using proDuck.Presistence.Repositories.OrdersRepositories.OrderDetailRepositories;
 using proDuck.Application.Repositories.OrderInterface.OrderDetail;
+using proDuck.Presistence.Repositories.ProductCardRepositories.ProductCardRepositories;
+using proDuck.Application.Repositories.ProductCardInterfaces.ProductCardInterface;
+using proDuck.Presistence.Repositories.ProductCardRepositories.PalletRespositories;
+using proDuck.Presistence.Repositories.ProductCardRepositories.CategoryRepositories;
+using proDuck.Application.Repositories.ProductCardInterfaces.CategoryInterface;
+using proDuck.Presistence.Repositories.ProductCardRepositories.ModelTypeRepositories;
+using proDuck.Application.Repositories.ProductCardInterfaces.PalletInterface;
+using proDuck.Application.Repositories.ProductCardInterfaces.ModelTypeInterface;
 
 namespace proDuck.Persistence
 {
@@ -47,8 +55,7 @@ namespace proDuck.Persistence
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
             services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
-            //services.AddScoped<IProductCardReadRepository, ProductCardReadRepository>();
-            //services.AddScoped<IProductCardWriteRepository, ProductCardWriteRepository>();
+
             services.AddScoped<IShippingAddressReadRepository, ShippingAddressReadRepository>();
             services.AddScoped<IShippingAddressWriteRepository, ShippingAddressWriteRepository>();
             services.AddScoped<IMeetingReadRepository,  MeetingReadRepository>();
@@ -59,6 +66,14 @@ namespace proDuck.Persistence
             services.AddScoped<IOfferDetailWriteRepository, OfferDetailWriteRepository>();
             services.AddScoped<IOrderDetailReadRepository,  OrderDetailReadRepository>();
             services.AddScoped<IOrderDetailWriteRepository, OrderDetailWriteRepository>();
+            services.AddScoped<IProductCardReadRepository,  ProductCardReadRepository>();
+            services.AddScoped<IProductCardWriteRepository, ProductCardWriteRepository>(); 
+            services.AddScoped<IPalletReadRepository,  PalletReadRepository>();
+            services.AddScoped<IPalletWriteRepository, PalletWriteRepository>();
+            services.AddScoped<ICategoryReadRepository,  CategoryReadRepository>();
+            services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
+            services.AddScoped<IModelTypeReadRepository,  ModelTypeReadRepository>();
+            services.AddScoped<IModelTypeWriteRepository, ModelTypeWriteRepository>();
 
             services.AddScoped<IFileReadRepository, FileReadRepository>();
             services.AddScoped<IFileWriteRepository, FileWriteRespository>();

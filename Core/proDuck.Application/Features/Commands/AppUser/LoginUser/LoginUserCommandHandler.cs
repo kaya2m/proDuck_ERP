@@ -15,12 +15,22 @@ namespace proDuck.Application.Features.Commands.AppUser.LoginUser
 
         public async Task<LoginUserCommandResponse> Handle(LoginUserCommandRequest request, CancellationToken cancellationToken)
         {
-         
-           TokenDto token = await _authService.LoginAsync(request.UsernameOrEmail, request.Password);
-            return new LoginUserSuccessResponse()
+            try
             {
-                Token = token
-            };
+                TokenDto token = await _authService.LoginAsync(request.UsernameOrEmail, request.Password);
+                return new LoginUserSuccessResponse()
+                {
+                    Token = token,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new LoginUserFailResponse()
+                {
+                    Message = ex.Message
+                };
+            }
+           
         }
     }
 }

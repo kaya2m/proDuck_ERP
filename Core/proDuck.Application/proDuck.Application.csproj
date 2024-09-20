@@ -8,8 +8,14 @@
 
   <ItemGroup>
     <Compile Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+    <Compile Remove="Features\Queries\ProductCard\GetAllProductCard\**" />
+    <Compile Remove="Features\Queries\ProductCard\GetByIdProductCard\**" />
     <EmbeddedResource Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+    <EmbeddedResource Remove="Features\Queries\ProductCard\GetAllProductCard\**" />
+    <EmbeddedResource Remove="Features\Queries\ProductCard\GetByIdProductCard\**" />
     <None Remove="Features\Queries\Offer\GetAllOrderDetail\**" />
+    <None Remove="Features\Queries\ProductCard\GetAllProductCard\**" />
+    <None Remove="Features\Queries\ProductCard\GetByIdProductCard\**" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -29,6 +35,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\Commands\ProductCard\Category\CreateCategory\" />
+	  <Folder Include="Features\Commands\ProductCard\Category\DeleteCategory\" />
+	  <Folder Include="Features\Commands\ProductCard\Category\UpdateCategory\" />
+	  <Folder Include="Features\Commands\ProductCard\ModelType\CreateModelType\" />
+	  <Folder Include="Features\Commands\ProductCard\ModelType\DeleteModelType\" />
+	  <Folder Include="Features\Commands\ProductCard\ModelType\UpdateModelType\" />
+	  <Folder Include="Features\Commands\ProductCard\Pallet\CreatePallet\" />
+	  <Folder Include="Features\Commands\ProductCard\Pallet\DeletePallet\" />
+	  <Folder Include="Features\Commands\ProductCard\Pallet\UpdatePallet\" />
 	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\DeleteShippingAddress\" />
 	  <Folder Include="Features\Commands\ShippingAddress\CreateShippingAddress\" />
@@ -37,8 +52,11 @@
 	  <Folder Include="Features\Commands\ShippingAddress\UpdateShippingAddress\" />
 	  <Folder Include="Features\Queries\Machine\GetAllMachine\" />
 	  <Folder Include="Features\Queries\Machine\GetByIdMachine\" />
-	  <Folder Include="Features\Queries\ProductCard\GetAllProductCard\" />
-	  <Folder Include="Features\Queries\ProductCard\GetByIdProductCard\" />
+	  <Folder Include="Features\Queries\Machine\GetAllMachine\" />
+	  <Folder Include="Features\Queries\Machine\GetByIdMachine\" />
+	  <Folder Include="Features\Queries\ProductCard\Category\" />
+	  <Folder Include="Features\Queries\ProductCard\ModelType\" />
+	  <Folder Include="Features\Queries\ProductCard\Pallet\" />
 	  <Folder Include="Features\Queries\ShippingAddress\GetByIdShippingAddress\" />
 	  <Folder Include="Features\Queries\ShippingAddress\GetByIdShippingAddress\" />
 	</ItemGroup>
