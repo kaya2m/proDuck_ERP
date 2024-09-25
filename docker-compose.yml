@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  webapi:
+    image: produck.webapi
+    build:
+      context: .
+      dockerfile: ./Presentation/proDuck.WebApi/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PostgreSQL=User ID=postgres;Password=produck2024;Host=db;Port=5432;Database=produck_db
+
+    networks:
+      - backend
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: produck2024
+      POSTGRES_DB: produck_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  dbdata:
+
+networks:
+  backend:
+    driver: bridge

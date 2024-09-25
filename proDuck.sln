@@ -3,21 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proDuck.Application", "Core\proDuck.Application\proDuck.Application.csproj", "{6A86FA77-15F3-438C-A3B8-75B821215F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "proDuck.Application", "Core\proDuck.Application\proDuck.Application.csproj", "{6A86FA77-15F3-438C-A3B8-75B821215F31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proDuck.Domain", "Core\proDuck.Domain\proDuck.Domain.csproj", "{390C936F-8DCC-424C-9686-10F01B4CAAF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "proDuck.Domain", "Core\proDuck.Domain\proDuck.Domain.csproj", "{390C936F-8DCC-424C-9686-10F01B4CAAF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proDuck.Infrastructure", "Infrastructure\proDuck.Infrastructure\proDuck.Infrastructure.csproj", "{16BCB95B-1DA0-4BDD-BBE6-A95508802660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "proDuck.Infrastructure", "Infrastructure\proDuck.Infrastructure\proDuck.Infrastructure.csproj", "{16BCB95B-1DA0-4BDD-BBE6-A95508802660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proDuck.Presistence", "Presistence\proDuck.Presistence\proDuck.Presistence.csproj", "{7BAFDBD9-1856-47CC-9539-843604B5A46E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "proDuck.Presistence", "Presistence\proDuck.Presistence\proDuck.Presistence.csproj", "{7BAFDBD9-1856-47CC-9539-843604B5A46E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proDuck.WebApi", "Presentation\proDuck.WebApi\proDuck.WebApi.csproj", "{FCB61704-9E65-4EBE-ADF1-50FF600650E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "proDuck.WebApi", "Presentation\proDuck.WebApi\proDuck.WebApi.csproj", "{FCB61704-9E65-4EBE-ADF1-50FF600650E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AB2BF1BD-A473-45F1-935B-664E18525BF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6040CF10-BDE5-4A4B-B7A0-FB371B8E6F96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F387535D-4E05-44B4-B1E3-7ED499ADF9DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{25EDE113-F5F7-4E53-ACB4-DCB182DA0ACD}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
