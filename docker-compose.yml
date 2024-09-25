@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   webapi:
-    image: produck.webapi
+    image: kaya349/produck_api:1.0.1
     build:
       context: .
       dockerfile: ./Presentation/proDuck.WebApi/Dockerfile
@@ -14,7 +14,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__PostgreSQL=User ID=postgres;Password=produck2024;Host=db;Port=5432;Database=produck_db
-
     networks:
       - backend
 
