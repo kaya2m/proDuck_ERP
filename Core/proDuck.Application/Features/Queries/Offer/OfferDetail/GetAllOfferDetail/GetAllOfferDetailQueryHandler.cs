@@ -1,42 +1,42 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetAllMeeting;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetAllMeeting;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.OfferDetail.GetAllOfferDetail
+namespace proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetAllProposalDetail
 {
-    public class GetAllOfferDetailQueryHandler : IRequestHandler<GetAllOfferDetailQueryRequest, GetAllOfferDetailQueryResponse>
+    public class GetAllProposalDetailQueryHandler : IRequestHandler<GetAllProposalDetailQueryRequest, GetAllProposalDetailQueryResponse>
     {
-        private readonly IOfferDetailReadRepository _offerDetailReadRepository;
+        private readonly IProposalDetailReadRepository _ProposalDetailReadRepository;
 
-        public GetAllOfferDetailQueryHandler(IOfferDetailReadRepository offerDetailReadRepository)
+        public GetAllProposalDetailQueryHandler(IProposalDetailReadRepository ProposalDetailReadRepository)
         {
-            _offerDetailReadRepository = offerDetailReadRepository;
+            _ProposalDetailReadRepository = ProposalDetailReadRepository;
         }
 
-        public async Task<GetAllOfferDetailQueryResponse> Handle(GetAllOfferDetailQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetAllProposalDetailQueryResponse> Handle(GetAllProposalDetailQueryRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var offerDetails = _offerDetailReadRepository.GetAll(false);
+                var ProposalDetails = _ProposalDetailReadRepository.GetAll(false);
 
-                var totalCount = await offerDetails.CountAsync();
+                var totalCount = await ProposalDetails.CountAsync();
 
-                var offerDetailFilters = await offerDetails
+                var ProposalDetailFilters = await ProposalDetails
                     .Skip(request.Page * request.Size)
                     .Take(request.Size)
                     .ToListAsync();
 
-                return new GetAllOfferDetailQueryResponse
+                return new GetAllProposalDetailQueryResponse
                 {
-                    Data = offerDetails,
+                    Data = ProposalDetails,
                     TotalCount = totalCount,
                     IsSuccessful = true,
                     StatusCode = StatusCodes.Status200OK
@@ -44,7 +44,7 @@ namespace proDuck.Application.Features.Queries.Offer.OfferDetail.GetAllOfferDeta
             }
             catch (Exception ex)
             {
-                return new GetAllOfferDetailQueryResponse
+                return new GetAllProposalDetailQueryResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

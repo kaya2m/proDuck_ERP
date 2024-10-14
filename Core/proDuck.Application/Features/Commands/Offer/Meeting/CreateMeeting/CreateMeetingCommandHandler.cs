@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
 using proDuck.Application.Repositories.OrderInterface;
 
-namespace proDuck.Application.Features.Commands.Offer.Meeting.CreateMeeting;
+namespace proDuck.Application.Features.Commands.Proposal.Meeting.CreateMeeting;
 
 public class CreateMeetingCommandHandler : IRequestHandler<CreateMeetingCommandRequest, CreateMeetingCommandResponse>
 {

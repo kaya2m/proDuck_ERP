@@ -1,12 +1,14 @@
 ﻿using proDuck.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.Machine
 {
+    [Table("machines")]
     public class TBL_Machine : BaseEntity
     {
         public string MachineName { get; set; }

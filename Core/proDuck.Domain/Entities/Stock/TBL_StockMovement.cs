@@ -6,12 +6,14 @@ using proDuck.Domain.Entities.ProductCard;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.Stock
 {
+    [Table("stockmovement")]
     public class TBL_StockMovement : BaseEntity
     {
         public Guid MovementId { get; set; }

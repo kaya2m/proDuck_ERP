@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.DeleteOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.DeleteProposalDetail
 {
-    public class DeleteOfferDetailCommandResponse : ResponseDto<DeleteOfferDetailCommandResponse>
+    public class DeleteProposalDetailCommandResponse : ResponseDto<DeleteProposalDetailCommandResponse>
     {
     }
 }

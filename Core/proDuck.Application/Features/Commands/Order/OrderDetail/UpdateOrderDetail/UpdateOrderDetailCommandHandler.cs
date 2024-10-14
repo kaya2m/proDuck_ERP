@@ -34,8 +34,8 @@ namespace proDuck.Application.Features.Commands.Order.OrderDetail.UpdateOrderDet
                     oderDetail.OrderSequence = request.OrderSequence;
                     oderDetail.CustomerId = request.CustomerId;
                     oderDetail.OrderId = request.OrderId;
-                    oderDetail.OfferId = request.OfferId;
-                    oderDetail.OfferDetailId = request.OfferDetailId;
+                    oderDetail.ProposalId = request.ProposalId;
+                    oderDetail.ProposalDetailId = request.ProposalDetailId;
                     oderDetail.CustomerOrderNumber = request.CustomerOrderNumber;
                     oderDetail.SpecialCode = request.SpecialCode;
                     oderDetail.ProductCardId = request.ProductCardId;

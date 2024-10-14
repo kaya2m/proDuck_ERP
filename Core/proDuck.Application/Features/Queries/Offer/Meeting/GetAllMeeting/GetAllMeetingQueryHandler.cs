@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
 
-namespace proDuck.Application.Features.Queries.Offer.Meeting.GetAllMeeting;
+namespace proDuck.Application.Features.Queries.Proposal.Meeting.GetAllMeeting;
 
 public class GetAllMeetingQueryHandler : IRequestHandler<GetAllMeetingQueryRequest, GetAllMeetingQueryResponse>
 {

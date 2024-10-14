@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
 
-namespace proDuck.Application.Features.Commands.Offer.Meeting.DeleteMeeting;
+namespace proDuck.Application.Features.Commands.Proposal.Meeting.DeleteMeeting;
 
 public class DeleteMeetingCommandHandler : IRequestHandler<DeleteMeetingCommandRequest, DeleteMeetingCommandResponse>
 {

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.UpdateOffer
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.UpdateProposal
 {
-    public class UpdateOfferCommandRequest : IRequest<UpdateOfferCommandResponse>
+    public class UpdateProposalCommandRequest : IRequest<UpdateProposalCommandResponse>
     {
         public Guid id { get; set; }
         public string   Type { get; set; }
-        public string   OfferNumber { get; set; }
+        public string   ProposalNumber { get; set; }
         public string   CompanyNumber { get; set; }
         public string   PaymentMethod { get; set; }
         public int      PaymentTerm { get; set; }

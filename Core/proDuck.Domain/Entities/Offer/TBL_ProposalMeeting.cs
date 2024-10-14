@@ -2,10 +2,12 @@
 using proDuck.Domain.Entities.Customer;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace proDuck.Domain.Entities.Offer
+namespace proDuck.Domain.Entities.Proposal
 {
-    public class TBL_OfferMeeting : BaseEntity
+    [Table("proposalmeeting")]
+    public class TBL_ProposalMeeting : BaseEntity
     {
         public Guid CustomerId { get; set; }
         public string CommunicationType { get; set; }

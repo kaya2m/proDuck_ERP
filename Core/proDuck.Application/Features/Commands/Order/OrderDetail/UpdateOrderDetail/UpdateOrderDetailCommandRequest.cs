@@ -13,8 +13,8 @@ namespace proDuck.Application.Features.Commands.Order.OrderDetail.UpdateOrderDet
         public int OrderSequence { get; set; }
         public Guid CustomerId { get; set; }
         public Guid OrderId { get; set; }
-        public Guid OfferId { get; set; }
-        public Guid OfferDetailId { get; set; }
+        public Guid ProposalId { get; set; }
+        public Guid ProposalDetailId { get; set; }
         public string CustomerOrderNumber { get; set; }
         public string SpecialCode { get; set; }
         public Guid ProductCardId { get; set; }

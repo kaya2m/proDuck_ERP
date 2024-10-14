@@ -1,42 +1,42 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetAllMeeting;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetAllMeeting;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.Offer.GetAllOffer
+namespace proDuck.Application.Features.Queries.Proposal.Proposal.GetAllProposal
 {
-    public class GetAllOfferQueryHandler : IRequestHandler<GetAllOfferQueryRequest, GetAllOfferQueryResponse>
+    public class GetAllProposalQueryHandler : IRequestHandler<GetAllProposalQueryRequest, GetAllProposalQueryResponse>
     {
-        private readonly IOfferReadRepository _offerReadRepository;
+        private readonly IProposalReadRepository _ProposalReadRepository;
 
-        public GetAllOfferQueryHandler(IOfferReadRepository offerReadRepository)
+        public GetAllProposalQueryHandler(IProposalReadRepository ProposalReadRepository)
         {
-            _offerReadRepository = offerReadRepository;
+            _ProposalReadRepository = ProposalReadRepository;
         }
 
-        public async Task<GetAllOfferQueryResponse> Handle(GetAllOfferQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetAllProposalQueryResponse> Handle(GetAllProposalQueryRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var offers = _offerReadRepository.GetAll(false);
+                var Proposals = _ProposalReadRepository.GetAll(false);
 
-                var totalCount = await offers.CountAsync();
+                var totalCount = await Proposals.CountAsync();
 
-                var offerFilters = await offers
+                var ProposalFilters = await Proposals
                     .Skip(request.Page * request.Size)
                     .Take(request.Size)
                     .ToListAsync();
 
-                return new GetAllOfferQueryResponse
+                return new GetAllProposalQueryResponse
                 {
-                    Data = offers,
+                    Data = Proposals,
                     TotalCount = totalCount,
                     IsSuccessful = true,
                     StatusCode = StatusCodes.Status200OK
@@ -44,7 +44,7 @@ namespace proDuck.Application.Features.Queries.Offer.Offer.GetAllOffer
             }
             catch (Exception ex)
             {
-                return new GetAllOfferQueryResponse
+                return new GetAllProposalQueryResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

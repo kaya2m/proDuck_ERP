@@ -1,58 +1,58 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDetail;
-using proDuck.Application.Features.Commands.Offer.OfferDetail.DeleteOfferDetail;
-using proDuck.Application.Features.Commands.Offer.OfferDetail.UpdateOfferDetail;
-using proDuck.Application.Features.Queries.Offer.OfferDetail.GetAllOfferDetail;
-using proDuck.Application.Features.Queries.Offer.OfferDetail.GetByIdOfferDetail;
+using proDuck.Application.Features.Commands.Proposal.ProposalDetail.CreateProposalDetail;
+using proDuck.Application.Features.Commands.Proposal.ProposalDetail.DeleteProposalDetail;
+using proDuck.Application.Features.Commands.Proposal.ProposalDetail.UpdateProposalDetail;
+using proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetAllProposalDetail;
+using proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetByIdProposalDetail;
 
 
 namespace proDuck.WebApi.Controllers
 {
-    [Route("api/offerDetails")]
+    [Route("api/ProposalDetails")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Admin")]
-    public class OfferDetailController : ControllerBase
+    public class ProposalDetailController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public OfferDetailController(IMediator mediator)
+        public ProposalDetailController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] GetByIdOfferDetailQueryRequest getByIdOfferDetailQueryRequest)
+        public async Task<IActionResult> Get([FromRoute] GetByIdProposalDetailQueryRequest getByIdProposalDetailQueryRequest)
         {
-            GetByIdOfferDetailQueryResponse response = await _mediator.Send(getByIdOfferDetailQueryRequest);
+            GetByIdProposalDetailQueryResponse response = await _mediator.Send(getByIdProposalDetailQueryRequest);
             return Ok(response);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllOfferDetailQueryRequest getAllOfferDetailQueryRequest)
+        public async Task<IActionResult> Get([FromQuery] GetAllProposalDetailQueryRequest getAllProposalDetailQueryRequest)
         {
-            GetAllOfferDetailQueryResponse response = await _mediator.Send(getAllOfferDetailQueryRequest);
+            GetAllProposalDetailQueryResponse response = await _mediator.Send(getAllProposalDetailQueryRequest);
             return Ok(response);
         }
         [HttpPost]
-        public async Task<IActionResult> Post(CreateOfferDetailCommandRequest createOfferDetailCommandRequest)
+        public async Task<IActionResult> Post(CreateProposalDetailCommandRequest createProposalDetailCommandRequest)
         {
-            CreateOfferDetailCommandResponse response = await _mediator.Send(createOfferDetailCommandRequest);
+            CreateProposalDetailCommandResponse response = await _mediator.Send(createProposalDetailCommandRequest);
             return Ok(response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateOfferDetailCommandRequest request)
+        public async Task<IActionResult> Put([FromBody] UpdateProposalDetailCommandRequest request)
         {
-            UpdateOfferDetailCommandResponse response = await _mediator.Send(request);
+            UpdateProposalDetailCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] DeleteOfferDetailCommandRequest request)
+        public async Task<IActionResult> Delete([FromRoute] DeleteProposalDetailCommandRequest request)
         {
-            DeleteOfferDetailCommandResponse response = await _mediator.Send(request);
+            DeleteProposalDetailCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }
     }

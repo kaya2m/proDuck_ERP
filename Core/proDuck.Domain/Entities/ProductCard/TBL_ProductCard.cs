@@ -1,14 +1,16 @@
 ﻿using proDuck.Domain.Entities.Common;
 using proDuck.Domain.Entities.Customer;
 using proDuck.Domain.Entities.Machine;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proDuck.Domain.Entities.ProductCard
 {
+    [Table("productcard")]
     public class TBL_ProductCard : BaseEntity
     {
         public string ProductCode { get; set; }
@@ -45,7 +47,7 @@ namespace proDuck.Domain.Entities.ProductCard
         public TBL_Pallet Pallet { get; set; }
         public TBL_VehicleType VehicleType { get; set; }
         public TBL_SalesRepresentative Representative { get; set; }
-        public ICollection<TBL_OfferDetails> OfferDetails { get; set; }
+        public ICollection<TBL_ProposalDetails> ProposalDetails { get; set; }
         public ICollection<TBL_OrderDetails> OrderDetails { get; set; }
     }
 }

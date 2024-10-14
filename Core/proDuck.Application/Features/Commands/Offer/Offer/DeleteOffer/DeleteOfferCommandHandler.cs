@@ -1,46 +1,46 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.DeleteOffer
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.DeleteProposal
 {
-    public class DeleteOfferCommandHandler : IRequestHandler<DeleteOfferCommandRequest, DeleteOfferCommandResponse>
+    public class DeleteProposalCommandHandler : IRequestHandler<DeleteProposalCommandRequest, DeleteProposalCommandResponse>
     {
-        private readonly IOfferReadRepository _offerReadRepository;
-        private readonly IOfferWriteRepository _offerWriteRepository;
+        private readonly IProposalReadRepository _ProposalReadRepository;
+        private readonly IProposalWriteRepository _ProposalWriteRepository;
 
-        public DeleteOfferCommandHandler(IOfferReadRepository offerReadRepository, IOfferWriteRepository offerWriteRepository)
+        public DeleteProposalCommandHandler(IProposalReadRepository ProposalReadRepository, IProposalWriteRepository ProposalWriteRepository)
         {
-            _offerReadRepository = offerReadRepository;
-            _offerWriteRepository = offerWriteRepository;
+            _ProposalReadRepository = ProposalReadRepository;
+            _ProposalWriteRepository = ProposalWriteRepository;
         }
 
-        public async Task<DeleteOfferCommandResponse> Handle(DeleteOfferCommandRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteProposalCommandResponse> Handle(DeleteProposalCommandRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var offer = await _offerReadRepository.GetByIdAsync(request.id);
-                if (offer == null)
+                var Proposal = await _ProposalReadRepository.GetByIdAsync(request.id);
+                if (Proposal == null)
                 {
-                    return new DeleteOfferCommandResponse
+                    return new DeleteProposalCommandResponse
                     {
-                        Message = "Offer not found",
+                        Message = "Proposal not found",
                         IsSuccessful = false
                     };
                 }
                 else
                 {
-                    offer.Status = false;
-                    _offerWriteRepository.Update(offer);
-                    await _offerWriteRepository.SaveChangesAsync();
-                    return new DeleteOfferCommandResponse
+                    Proposal.Status = false;
+                    _ProposalWriteRepository.Update(Proposal);
+                    await _ProposalWriteRepository.SaveChangesAsync();
+                    return new DeleteProposalCommandResponse
                     {
-                        Message = "Offer deleted successfully",
+                        Message = "Proposal deleted successfully",
                         IsSuccessful = true,
                         StatusCode = StatusCodes.Status204NoContent
                     };
@@ -48,7 +48,7 @@ namespace proDuck.Application.Features.Commands.Offer.Offer.DeleteOffer
             }
             catch (Exception ex)
             {
-                return new DeleteOfferCommandResponse
+                return new DeleteProposalCommandResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

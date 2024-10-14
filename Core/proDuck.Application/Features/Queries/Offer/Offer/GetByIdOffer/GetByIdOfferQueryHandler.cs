@@ -1,33 +1,33 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetByIdMetting;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetByIdMetting;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.Offer.GetByIdOffer
+namespace proDuck.Application.Features.Queries.Proposal.Proposal.GetByIdProposal
 {
-    public class GetByIdOfferQueryHandler : IRequestHandler<GetByIdOfferQueryRequest, GetByIdOfferQueryResponse>
+    public class GetByIdProposalQueryHandler : IRequestHandler<GetByIdProposalQueryRequest, GetByIdProposalQueryResponse>
     {
-        private readonly IOfferReadRepository _offerReadRepository;
+        private readonly IProposalReadRepository _ProposalReadRepository;
 
-        public GetByIdOfferQueryHandler(IOfferReadRepository offerReadRepository)
+        public GetByIdProposalQueryHandler(IProposalReadRepository ProposalReadRepository)
         {
-            _offerReadRepository = offerReadRepository;
+            _ProposalReadRepository = ProposalReadRepository;
         }
 
-        public async Task<GetByIdOfferQueryResponse> Handle(GetByIdOfferQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetByIdProposalQueryResponse> Handle(GetByIdProposalQueryRequest request, CancellationToken cancellationToken)
         {
-            var offer = await _offerReadRepository.GetByIdAsync(request.id, false);
-            var isSuccessful = offer != null;
+            var Proposal = await _ProposalReadRepository.GetByIdAsync(request.id, false);
+            var isSuccessful = Proposal != null;
 
-            return new GetByIdOfferQueryResponse
+            return new GetByIdProposalQueryResponse
             {
-                Data = offer,
+                Data = Proposal,
                 IsSuccessful = isSuccessful,
                 StatusCode = isSuccessful ? StatusCodes.Status200OK : StatusCodes.Status404NotFound,
             };

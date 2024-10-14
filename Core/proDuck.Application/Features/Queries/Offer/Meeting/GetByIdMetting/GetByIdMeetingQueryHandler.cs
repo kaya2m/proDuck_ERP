@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-namespace proDuck.Application.Features.Queries.Offer.Meeting.GetByIdMetting;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+namespace proDuck.Application.Features.Queries.Proposal.Meeting.GetByIdMetting;
 
 public class GetByIdMeetingQueryHandler : IRequestHandler<GetByIdMeetingQueryRequest, GetByIdMeetingQueryResponse>
 {

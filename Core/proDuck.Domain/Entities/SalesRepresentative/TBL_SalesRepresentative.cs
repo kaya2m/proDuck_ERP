@@ -1,11 +1,13 @@
 ﻿using proDuck.Domain.Entities.Common;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proDuck.Domain.Entities.SalesRepresentative
 {
+    [Table("salesrepresentative")]
     public class TBL_SalesRepresentative : BaseEntity
     {
         public string FirstName { get; set; }
@@ -38,7 +40,7 @@ namespace proDuck.Domain.Entities.SalesRepresentative
         public string EmergencyContactName { get; set; }
         public string EmergencyContactPhone { get; set; }
 
-        public virtual ICollection<TBL_Offer> Offers { get; set; }
+        public virtual ICollection<TBL_Proposal> Proposals { get; set; }
         public virtual ICollection<TBL_Order> Orders { get; set; }
     }
 }

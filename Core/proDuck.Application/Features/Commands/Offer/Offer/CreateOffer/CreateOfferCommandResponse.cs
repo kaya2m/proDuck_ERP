@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.CreateOffer
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.CreateProposal
 {
-    public class CreateOfferCommandResponse : ResponseDto<CreateOfferCommandResponse>
+    public class CreateProposalCommandResponse : ResponseDto<CreateProposalCommandResponse>
     {
     }
 }

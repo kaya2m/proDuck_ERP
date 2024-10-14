@@ -7,13 +7,17 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace proDuck.Presistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialize : Migration
+    public partial class NewDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "public");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -28,6 +32,7 @@ namespace proDuck.Presistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -54,7 +59,8 @@ namespace proDuck.Presistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "category",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -68,46 +74,28 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "countries",
+                schema: "public",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Code = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    PaymentMethod = table.Column<int>(type: "integer", nullable: false),
+                    CountryId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CountryCode = table.Column<string>(type: "text", nullable: true),
-                    CountryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CityId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TownId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ContactNumber = table.Column<string>(type: "text", nullable: true),
-                    ContactNumber2 = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    Email2 = table.Column<string>(type: "text", nullable: true),
-                    Address = table.Column<string>(type: "text", nullable: true),
-                    Address2 = table.Column<string>(type: "text", nullable: true),
-                    PostCode = table.Column<string>(type: "text", nullable: true),
-                    CompanyName = table.Column<string>(type: "text", nullable: true),
-                    TaxNumber = table.Column<string>(type: "text", nullable: true),
-                    TaxOffice = table.Column<string>(type: "text", nullable: true),
-                    idNumber = table.Column<string>(type: "text", nullable: true),
-                    Notes = table.Column<string>(type: "text", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<bool>(type: "boolean", nullable: false),
-                    UserCreated = table.Column<string>(type: "text", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
+                    CountryName = table.Column<string>(type: "text", nullable: true),
+                    CountryDialCode = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.PrimaryKey("PK_countries", x => x.CountryId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Files",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -126,7 +114,8 @@ namespace proDuck.Presistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Machines",
+                name: "machines",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -147,11 +136,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Machines", x => x.Id);
+                    table.PrimaryKey("PK_machines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ModelTypes",
+                name: "modeltype",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -166,11 +156,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ModelTypes", x => x.Id);
+                    table.PrimaryKey("PK_modeltype", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pallets",
+                name: "pallet",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -188,11 +179,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pallets", x => x.Id);
+                    table.PrimaryKey("PK_pallet", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentTypes",
+                name: "paymenttype",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -206,11 +198,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaymentTypes", x => x.Id);
+                    table.PrimaryKey("PK_paymenttype", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SalesRepresentatives",
+                name: "salesrepresentative",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -251,11 +244,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalesRepresentatives", x => x.Id);
+                    table.PrimaryKey("PK_salesrepresentative", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SalesTypes",
+                name: "salestype",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -270,11 +264,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalesTypes", x => x.Id);
+                    table.PrimaryKey("PK_salestype", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UnitOfMeasures",
+                name: "unitofmeasure",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -288,11 +283,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UnitOfMeasures", x => x.Id);
+                    table.PrimaryKey("PK_unitofmeasure", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "VehicleTypes",
+                name: "vehicletype",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -308,38 +304,12 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Warehouses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    WarehouseName = table.Column<string>(type: "text", nullable: true),
-                    Location = table.Column<string>(type: "text", nullable: true),
-                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
-                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
-                    CityId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CountryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PostalCode = table.Column<string>(type: "text", nullable: true),
-                    ContactPerson = table.Column<string>(type: "text", nullable: true),
-                    ContactPhone = table.Column<string>(type: "text", nullable: true),
-                    ContactEmail = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<bool>(type: "boolean", nullable: false),
-                    UserCreated = table.Column<string>(type: "text", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Warehouses", x => x.Id);
+                    table.PrimaryKey("PK_vehicletype", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -354,6 +324,7 @@ namespace proDuck.Presistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "public",
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -361,6 +332,7 @@ namespace proDuck.Presistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -375,6 +347,7 @@ namespace proDuck.Presistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalSchema: "public",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -382,6 +355,7 @@ namespace proDuck.Presistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
+                schema: "public",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
@@ -395,6 +369,7 @@ namespace proDuck.Presistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalSchema: "public",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -402,6 +377,7 @@ namespace proDuck.Presistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
+                schema: "public",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "text", nullable: false),
@@ -413,12 +389,14 @@ namespace proDuck.Presistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "public",
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalSchema: "public",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -426,6 +404,7 @@ namespace proDuck.Presistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
+                schema: "public",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "text", nullable: false),
@@ -439,56 +418,127 @@ namespace proDuck.Presistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalSchema: "public",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShippingAddresses",
+                name: "cities",
+                schema: "public",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    AccountName = table.Column<string>(type: "text", nullable: true),
-                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
-                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
-                    TownId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CityId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CountryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CountryCode = table.Column<string>(type: "text", nullable: true),
-                    Postcode = table.Column<string>(type: "text", nullable: true),
-                    Telephone1 = table.Column<string>(type: "text", nullable: true),
-                    Telephone2 = table.Column<string>(type: "text", nullable: true),
-                    EmailAddress = table.Column<string>(type: "text", nullable: true),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<bool>(type: "boolean", nullable: false),
-                    UserCreated = table.Column<string>(type: "text", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
+                    CityId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CityName = table.Column<string>(type: "text", nullable: true),
+                    CountryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShippingAddresses", x => x.Id);
+                    table.PrimaryKey("PK_cities", x => x.CityId);
                     table.ForeignKey(
-                        name: "FK_ShippingAddresses_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
+                        name: "FK_cities_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OfferMeetings",
+                name: "districts",
+                schema: "public",
+                columns: table => new
+                {
+                    DistrictId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DistrictName = table.Column<string>(type: "text", nullable: true),
+                    CountryId = table.Column<int>(type: "integer", nullable: false),
+                    CityId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_districts", x => x.DistrictId);
+                    table.ForeignKey(
+                        name: "FK_districts_cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "public",
+                        principalTable: "cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_districts_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "neighborhoods",
+                schema: "public",
+                columns: table => new
+                {
+                    NeighborhoodId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NeighborhoodName = table.Column<string>(type: "text", nullable: true),
+                    DistrictId = table.Column<int>(type: "integer", nullable: false),
+                    CityId = table.Column<int>(type: "integer", nullable: false),
+                    CountryId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_neighborhoods", x => x.NeighborhoodId);
+                    table.ForeignKey(
+                        name: "FK_neighborhoods_cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "public",
+                        principalTable: "cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_neighborhoods_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_neighborhoods_districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "public",
+                        principalTable: "districts",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "customer",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CommunicationType = table.Column<string>(type: "text", nullable: true),
-                    CustomerRepresentativeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CustomerContactPerson = table.Column<string>(type: "text", nullable: true),
-                    CustomerContactEmail = table.Column<string>(type: "text", nullable: true),
-                    CustomerContactPhone = table.Column<string>(type: "text", nullable: true),
+                    Code = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    PaymentMethod = table.Column<int>(type: "integer", nullable: false),
+                    CountryCode = table.Column<string>(type: "text", nullable: true),
+                    CountryId = table.Column<int>(type: "integer", nullable: false),
+                    CityId = table.Column<int>(type: "integer", nullable: false),
+                    DistrictId = table.Column<int>(type: "integer", nullable: false),
+                    NeighborhoodId = table.Column<int>(type: "integer", nullable: false),
+                    ContactNumber = table.Column<string>(type: "text", nullable: true),
+                    ContactNumber2 = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Email2 = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    Address2 = table.Column<string>(type: "text", nullable: true),
+                    PostCode = table.Column<string>(type: "text", nullable: true),
+                    CompanyName = table.Column<string>(type: "text", nullable: true),
+                    TaxNumber = table.Column<string>(type: "text", nullable: true),
+                    TaxOffice = table.Column<string>(type: "text", nullable: true),
+                    idNumber = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<bool>(type: "boolean", nullable: false),
@@ -498,23 +548,98 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OfferMeetings", x => x.Id);
+                    table.PrimaryKey("PK_customer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OfferMeetings_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_customer_cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "public",
+                        principalTable: "cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OfferMeetings_SalesRepresentatives_CustomerRepresentativeId",
-                        column: x => x.CustomerRepresentativeId,
-                        principalTable: "SalesRepresentatives",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_customer_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_customer_districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "public",
+                        principalTable: "districts",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_customer_neighborhoods_NeighborhoodId",
+                        column: x => x.NeighborhoodId,
+                        principalSchema: "public",
+                        principalTable: "neighborhoods",
+                        principalColumn: "NeighborhoodId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductCards",
+                name: "warehouse",
+                schema: "public",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    WarehouseName = table.Column<string>(type: "text", nullable: true),
+                    Location = table.Column<string>(type: "text", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
+                    CountryId = table.Column<int>(type: "integer", nullable: false),
+                    CityId = table.Column<int>(type: "integer", nullable: false),
+                    DistrictId = table.Column<int>(type: "integer", nullable: false),
+                    NeighborhoodId = table.Column<int>(type: "integer", nullable: false),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    ContactPerson = table.Column<string>(type: "text", nullable: true),
+                    ContactPhone = table.Column<string>(type: "text", nullable: true),
+                    ContactEmail = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false),
+                    UserCreated = table.Column<string>(type: "text", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_warehouse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_warehouse_cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "public",
+                        principalTable: "cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_warehouse_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_warehouse_districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "public",
+                        principalTable: "districts",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_warehouse_neighborhoods_NeighborhoodId",
+                        column: x => x.NeighborhoodId,
+                        principalSchema: "public",
+                        principalTable: "neighborhoods",
+                        principalColumn: "NeighborhoodId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "productcard",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -553,74 +678,70 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductCards", x => x.Id);
+                    table.PrimaryKey("PK_productcard", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductCards_Categories_TBL_CategoryId",
+                        name: "FK_productcard_category_TBL_CategoryId",
                         column: x => x.TBL_CategoryId,
-                        principalTable: "Categories",
+                        principalSchema: "public",
+                        principalTable: "category",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductCards_Customers_CustomerId",
+                        name: "FK_productcard_customer_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCards_Machines_MachineId",
+                        name: "FK_productcard_machines_MachineId",
                         column: x => x.MachineId,
-                        principalTable: "Machines",
+                        principalSchema: "public",
+                        principalTable: "machines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCards_ModelTypes_ModelId",
+                        name: "FK_productcard_modeltype_ModelId",
                         column: x => x.ModelId,
-                        principalTable: "ModelTypes",
+                        principalSchema: "public",
+                        principalTable: "modeltype",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCards_Pallets_PalletId",
+                        name: "FK_productcard_pallet_PalletId",
                         column: x => x.PalletId,
-                        principalTable: "Pallets",
+                        principalSchema: "public",
+                        principalTable: "pallet",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCards_SalesRepresentatives_RepresentativeId",
+                        name: "FK_productcard_salesrepresentative_RepresentativeId",
                         column: x => x.RepresentativeId,
-                        principalTable: "SalesRepresentatives",
+                        principalSchema: "public",
+                        principalTable: "salesrepresentative",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCards_VehicleTypes_VehicleTypeId",
+                        name: "FK_productcard_vehicletype_VehicleTypeId",
                         column: x => x.VehicleTypeId,
-                        principalTable: "VehicleTypes",
+                        principalSchema: "public",
+                        principalTable: "vehicletype",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Offer",
+                name: "proposalmeeting",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Type = table.Column<string>(type: "text", nullable: true),
-                    OfferNumber = table.Column<string>(type: "text", nullable: true),
-                    CompanyNumber = table.Column<string>(type: "text", nullable: true),
-                    PaymentMethod = table.Column<string>(type: "text", nullable: true),
-                    PaymentTerm = table.Column<int>(type: "integer", nullable: false),
-                    ContactPerson = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Unit = table.Column<string>(type: "text", nullable: true),
-                    TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
-                    DiscountedTotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ShippingAddressId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MeetingId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SalesRepresentativeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    VehicleTypeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PaymentTypeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SalesTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CommunicationType = table.Column<string>(type: "text", nullable: true),
+                    CustomerRepresentativeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CustomerContactPerson = table.Column<string>(type: "text", nullable: true),
+                    CustomerContactEmail = table.Column<string>(type: "text", nullable: true),
+                    CustomerContactPhone = table.Column<string>(type: "text", nullable: true),
+                    Notes = table.Column<string>(type: "text", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreated = table.Column<string>(type: "text", nullable: true),
@@ -629,53 +750,90 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Offer", x => x.Id);
+                    table.PrimaryKey("PK_proposalmeeting", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Offer_Customers_CustomerId",
+                        name: "FK_proposalmeeting_customer_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Offer_OfferMeetings_MeetingId",
-                        column: x => x.MeetingId,
-                        principalTable: "OfferMeetings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Offer_PaymentTypes_PaymentTypeId",
-                        column: x => x.PaymentTypeId,
-                        principalTable: "PaymentTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Offer_SalesRepresentatives_SalesRepresentativeId",
-                        column: x => x.SalesRepresentativeId,
-                        principalTable: "SalesRepresentatives",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Offer_SalesTypes_SalesTypeId",
-                        column: x => x.SalesTypeId,
-                        principalTable: "SalesTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Offer_ShippingAddresses_ShippingAddressId",
-                        column: x => x.ShippingAddressId,
-                        principalTable: "ShippingAddresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Offer_VehicleTypes_VehicleTypeId",
-                        column: x => x.VehicleTypeId,
-                        principalTable: "VehicleTypes",
+                        name: "FK_proposalmeeting_salesrepresentative_CustomerRepresentativeId",
+                        column: x => x.CustomerRepresentativeId,
+                        principalSchema: "public",
+                        principalTable: "salesrepresentative",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StockMovements",
+                name: "shippingaddress",
+                schema: "public",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    AccountName = table.Column<string>(type: "text", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
+                    CountryId = table.Column<int>(type: "integer", nullable: false),
+                    CityId = table.Column<int>(type: "integer", nullable: false),
+                    DistrictId = table.Column<int>(type: "integer", nullable: false),
+                    NeighborhoodId = table.Column<int>(type: "integer", nullable: false),
+                    Postcode = table.Column<string>(type: "text", nullable: true),
+                    Telephone1 = table.Column<string>(type: "text", nullable: true),
+                    Telephone2 = table.Column<string>(type: "text", nullable: true),
+                    EmailAddress = table.Column<string>(type: "text", nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false),
+                    UserCreated = table.Column<string>(type: "text", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_shippingaddress", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_shippingaddress_cities_CityId",
+                        column: x => x.CityId,
+                        principalSchema: "public",
+                        principalTable: "cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_shippingaddress_countries_CountryId",
+                        column: x => x.CountryId,
+                        principalSchema: "public",
+                        principalTable: "countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_shippingaddress_customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalSchema: "public",
+                        principalTable: "customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_shippingaddress_districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "public",
+                        principalTable: "districts",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_shippingaddress_neighborhoods_NeighborhoodId",
+                        column: x => x.NeighborhoodId,
+                        principalSchema: "public",
+                        principalTable: "neighborhoods",
+                        principalColumn: "NeighborhoodId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "stockmovement",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -718,58 +876,68 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StockMovements", x => x.Id);
+                    table.PrimaryKey("PK_stockmovement", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StockMovements_Customers_CustomerId",
+                        name: "FK_stockmovement_customer_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StockMovements_Machines_MachineId",
+                        name: "FK_stockmovement_machines_MachineId",
                         column: x => x.MachineId,
-                        principalTable: "Machines",
+                        principalSchema: "public",
+                        principalTable: "machines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StockMovements_ProductCards_ProductCardId",
+                        name: "FK_stockmovement_productcard_ProductCardId",
                         column: x => x.ProductCardId,
-                        principalTable: "ProductCards",
+                        principalSchema: "public",
+                        principalTable: "productcard",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_StockMovements_SalesRepresentatives_SalesRepresentativeId",
+                        name: "FK_stockmovement_salesrepresentative_SalesRepresentativeId",
                         column: x => x.SalesRepresentativeId,
-                        principalTable: "SalesRepresentatives",
+                        principalSchema: "public",
+                        principalTable: "salesrepresentative",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StockMovements_Warehouses_WarehouseId",
+                        name: "FK_stockmovement_warehouse_WarehouseId",
                         column: x => x.WarehouseId,
-                        principalTable: "Warehouses",
+                        principalSchema: "public",
+                        principalTable: "warehouse",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OfferDetails",
+                name: "proposal",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    StockNumber = table.Column<string>(type: "text", nullable: true),
-                    SerialNumber = table.Column<int>(type: "integer", nullable: false),
-                    SpecialCode = table.Column<string>(type: "text", nullable: true),
-                    UnitPrice = table.Column<decimal>(type: "numeric", nullable: false),
-                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Discount = table.Column<decimal>(type: "numeric", nullable: false),
-                    DiscountedAmount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
-                    Unit = table.Column<string>(type: "text", nullable: true),
-                    DeliveryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: true),
+                    ProposalNumber = table.Column<string>(type: "text", nullable: true),
+                    CompanyNumber = table.Column<string>(type: "text", nullable: true),
+                    PaymentMethod = table.Column<string>(type: "text", nullable: true),
+                    PaymentTerm = table.Column<int>(type: "integer", nullable: false),
+                    ContactPerson = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Image = table.Column<string>(type: "text", nullable: true),
+                    Unit = table.Column<string>(type: "text", nullable: true),
+                    TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    DiscountedTotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    OfferId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductCardId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ShippingAddressId = table.Column<Guid>(type: "uuid", nullable: false),
+                    MeetingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SalesRepresentativeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    VehicleTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PaymentTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SalesTypeId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreated = table.Column<string>(type: "text", nullable: true),
@@ -778,29 +946,70 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OfferDetails", x => x.Id);
+                    table.PrimaryKey("PK_proposal", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OfferDetails_Offer_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offer",
+                        name: "FK_proposal_customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OfferDetails_ProductCards_ProductCardId",
-                        column: x => x.ProductCardId,
-                        principalTable: "ProductCards",
+                        name: "FK_proposal_paymenttype_PaymentTypeId",
+                        column: x => x.PaymentTypeId,
+                        principalSchema: "public",
+                        principalTable: "paymenttype",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposal_proposalmeeting_MeetingId",
+                        column: x => x.MeetingId,
+                        principalSchema: "public",
+                        principalTable: "proposalmeeting",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposal_salesrepresentative_SalesRepresentativeId",
+                        column: x => x.SalesRepresentativeId,
+                        principalSchema: "public",
+                        principalTable: "salesrepresentative",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposal_salestype_SalesTypeId",
+                        column: x => x.SalesTypeId,
+                        principalSchema: "public",
+                        principalTable: "salestype",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposal_shippingaddress_ShippingAddressId",
+                        column: x => x.ShippingAddressId,
+                        principalSchema: "public",
+                        principalTable: "shippingaddress",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposal_vehicletype_VehicleTypeId",
+                        column: x => x.VehicleTypeId,
+                        principalSchema: "public",
+                        principalTable: "vehicletype",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "order",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderName = table.Column<string>(type: "text", nullable: true),
                     OrderNumber = table.Column<string>(type: "text", nullable: true),
-                    OfferId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProposalId = table.Column<Guid>(type: "uuid", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StockNumber = table.Column<string>(type: "text", nullable: true),
+                    SerialNumber = table.Column<string>(type: "text", nullable: true),
                     CustomerCode = table.Column<string>(type: "text", nullable: true),
                     PaymentMethod = table.Column<string>(type: "text", nullable: true),
                     SubPaymentMethod = table.Column<string>(type: "text", nullable: true),
@@ -823,42 +1032,91 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.PrimaryKey("PK_order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
+                        name: "FK_order_customer_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Offer_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offer",
+                        name: "FK_order_proposal_ProposalId",
+                        column: x => x.ProposalId,
+                        principalSchema: "public",
+                        principalTable: "proposal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_SalesRepresentatives_RepresentativeId",
+                        name: "FK_order_salesrepresentative_RepresentativeId",
                         column: x => x.RepresentativeId,
-                        principalTable: "SalesRepresentatives",
+                        principalSchema: "public",
+                        principalTable: "salesrepresentative",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_ShippingAddresses_TBL_ShippingAddressId",
+                        name: "FK_order_shippingaddress_TBL_ShippingAddressId",
                         column: x => x.TBL_ShippingAddressId,
-                        principalTable: "ShippingAddresses",
+                        principalSchema: "public",
+                        principalTable: "shippingaddress",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetails",
+                name: "proposaldetail",
+                schema: "public",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SpecialCode = table.Column<string>(type: "text", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    Discount = table.Column<decimal>(type: "numeric", nullable: false),
+                    DiscountedAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Unit = table.Column<string>(type: "text", nullable: true),
+                    DeliveryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Image = table.Column<string>(type: "text", nullable: true),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ProposalId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductCardId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false),
+                    UserCreated = table.Column<string>(type: "text", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedUser = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_proposaldetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_proposaldetail_productcard_ProductCardId",
+                        column: x => x.ProductCardId,
+                        principalSchema: "public",
+                        principalTable: "productcard",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_proposaldetail_proposal_ProposalId",
+                        column: x => x.ProposalId,
+                        principalSchema: "public",
+                        principalTable: "proposal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orderdetail",
+                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     OrderSequence = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
                     OrderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OfferId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OfferDetailId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProposalId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProposalDetailId = table.Column<Guid>(type: "uuid", nullable: false),
                     CustomerOrderNumber = table.Column<string>(type: "text", nullable: true),
                     SpecialCode = table.Column<string>(type: "text", nullable: true),
                     ProductCardId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -893,326 +1151,522 @@ namespace proDuck.Presistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.Id);
+                    table.PrimaryKey("PK_orderdetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Customers_CustomerId",
+                        name: "FK_orderdetail_customer_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
+                        principalSchema: "public",
+                        principalTable: "customer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Offer_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId",
+                        name: "FK_orderdetail_order_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Orders",
+                        principalSchema: "public",
+                        principalTable: "order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_ProductCards_ProductCardId",
+                        name: "FK_orderdetail_productcard_ProductCardId",
                         column: x => x.ProductCardId,
-                        principalTable: "ProductCards",
+                        principalSchema: "public",
+                        principalTable: "productcard",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_ShippingAddresses_ShippingAddressId",
+                        name: "FK_orderdetail_proposal_ProposalId",
+                        column: x => x.ProposalId,
+                        principalSchema: "public",
+                        principalTable: "proposal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_orderdetail_shippingaddress_ShippingAddressId",
                         column: x => x.ShippingAddressId,
-                        principalTable: "ShippingAddresses",
+                        principalSchema: "public",
+                        principalTable: "shippingaddress",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
+                schema: "public",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
+                schema: "public",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
+                schema: "public",
                 table: "AspNetUserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
+                schema: "public",
                 table: "AspNetUserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_RoleId",
+                schema: "public",
                 table: "AspNetUserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
+                schema: "public",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
+                schema: "public",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offer_CustomerId",
-                table: "Offer",
+                name: "IX_cities_CountryId",
+                schema: "public",
+                table: "cities",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_customer_CityId",
+                schema: "public",
+                table: "customer",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_customer_CountryId",
+                schema: "public",
+                table: "customer",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_customer_DistrictId",
+                schema: "public",
+                table: "customer",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_customer_NeighborhoodId",
+                schema: "public",
+                table: "customer",
+                column: "NeighborhoodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_districts_CityId",
+                schema: "public",
+                table: "districts",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_districts_CountryId",
+                schema: "public",
+                table: "districts",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_neighborhoods_CityId",
+                schema: "public",
+                table: "neighborhoods",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_neighborhoods_CountryId",
+                schema: "public",
+                table: "neighborhoods",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_neighborhoods_DistrictId",
+                schema: "public",
+                table: "neighborhoods",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_order_CustomerId",
+                schema: "public",
+                table: "order",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offer_MeetingId",
-                table: "Offer",
-                column: "MeetingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Offer_PaymentTypeId",
-                table: "Offer",
-                column: "PaymentTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Offer_SalesRepresentativeId",
-                table: "Offer",
-                column: "SalesRepresentativeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Offer_SalesTypeId",
-                table: "Offer",
-                column: "SalesTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Offer_ShippingAddressId",
-                table: "Offer",
-                column: "ShippingAddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Offer_VehicleTypeId",
-                table: "Offer",
-                column: "VehicleTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfferDetails_OfferId",
-                table: "OfferDetails",
-                column: "OfferId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfferDetails_ProductCardId",
-                table: "OfferDetails",
-                column: "ProductCardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfferMeetings_CustomerId",
-                table: "OfferMeetings",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfferMeetings_CustomerRepresentativeId",
-                table: "OfferMeetings",
-                column: "CustomerRepresentativeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_CustomerId",
-                table: "OrderDetails",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OfferId",
-                table: "OrderDetails",
-                column: "OfferId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId",
-                table: "OrderDetails",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProductCardId",
-                table: "OrderDetails",
-                column: "ProductCardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ShippingAddressId",
-                table: "OrderDetails",
-                column: "ShippingAddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerId",
-                table: "Orders",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_OfferId",
-                table: "Orders",
-                column: "OfferId",
+                name: "IX_order_ProposalId",
+                schema: "public",
+                table: "order",
+                column: "ProposalId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_RepresentativeId",
-                table: "Orders",
+                name: "IX_order_RepresentativeId",
+                schema: "public",
+                table: "order",
                 column: "RepresentativeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_TBL_ShippingAddressId",
-                table: "Orders",
+                name: "IX_order_TBL_ShippingAddressId",
+                schema: "public",
+                table: "order",
                 column: "TBL_ShippingAddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_CustomerId",
-                table: "ProductCards",
+                name: "IX_orderdetail_CustomerId",
+                schema: "public",
+                table: "orderdetail",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_MachineId",
-                table: "ProductCards",
-                column: "MachineId");
+                name: "IX_orderdetail_OrderId",
+                schema: "public",
+                table: "orderdetail",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_ModelId",
-                table: "ProductCards",
-                column: "ModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_PalletId",
-                table: "ProductCards",
-                column: "PalletId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_RepresentativeId",
-                table: "ProductCards",
-                column: "RepresentativeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_TBL_CategoryId",
-                table: "ProductCards",
-                column: "TBL_CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCards_VehicleTypeId",
-                table: "ProductCards",
-                column: "VehicleTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShippingAddresses_CustomerId",
-                table: "ShippingAddresses",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockMovements_CustomerId",
-                table: "StockMovements",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockMovements_MachineId",
-                table: "StockMovements",
-                column: "MachineId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockMovements_ProductCardId",
-                table: "StockMovements",
+                name: "IX_orderdetail_ProductCardId",
+                schema: "public",
+                table: "orderdetail",
                 column: "ProductCardId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StockMovements_SalesRepresentativeId",
-                table: "StockMovements",
+                name: "IX_orderdetail_ProposalId",
+                schema: "public",
+                table: "orderdetail",
+                column: "ProposalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orderdetail_ShippingAddressId",
+                schema: "public",
+                table: "orderdetail",
+                column: "ShippingAddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_CustomerId",
+                schema: "public",
+                table: "productcard",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_MachineId",
+                schema: "public",
+                table: "productcard",
+                column: "MachineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_ModelId",
+                schema: "public",
+                table: "productcard",
+                column: "ModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_PalletId",
+                schema: "public",
+                table: "productcard",
+                column: "PalletId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_RepresentativeId",
+                schema: "public",
+                table: "productcard",
+                column: "RepresentativeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_TBL_CategoryId",
+                schema: "public",
+                table: "productcard",
+                column: "TBL_CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_productcard_VehicleTypeId",
+                schema: "public",
+                table: "productcard",
+                column: "VehicleTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_CustomerId",
+                schema: "public",
+                table: "proposal",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_MeetingId",
+                schema: "public",
+                table: "proposal",
+                column: "MeetingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_PaymentTypeId",
+                schema: "public",
+                table: "proposal",
+                column: "PaymentTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_SalesRepresentativeId",
+                schema: "public",
+                table: "proposal",
                 column: "SalesRepresentativeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StockMovements_WarehouseId",
-                table: "StockMovements",
+                name: "IX_proposal_SalesTypeId",
+                schema: "public",
+                table: "proposal",
+                column: "SalesTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_ShippingAddressId",
+                schema: "public",
+                table: "proposal",
+                column: "ShippingAddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposal_VehicleTypeId",
+                schema: "public",
+                table: "proposal",
+                column: "VehicleTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposaldetail_ProductCardId",
+                schema: "public",
+                table: "proposaldetail",
+                column: "ProductCardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposaldetail_ProposalId",
+                schema: "public",
+                table: "proposaldetail",
+                column: "ProposalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposalmeeting_CustomerId",
+                schema: "public",
+                table: "proposalmeeting",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proposalmeeting_CustomerRepresentativeId",
+                schema: "public",
+                table: "proposalmeeting",
+                column: "CustomerRepresentativeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shippingaddress_CityId",
+                schema: "public",
+                table: "shippingaddress",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shippingaddress_CountryId",
+                schema: "public",
+                table: "shippingaddress",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shippingaddress_CustomerId",
+                schema: "public",
+                table: "shippingaddress",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shippingaddress_DistrictId",
+                schema: "public",
+                table: "shippingaddress",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shippingaddress_NeighborhoodId",
+                schema: "public",
+                table: "shippingaddress",
+                column: "NeighborhoodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_stockmovement_CustomerId",
+                schema: "public",
+                table: "stockmovement",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_stockmovement_MachineId",
+                schema: "public",
+                table: "stockmovement",
+                column: "MachineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_stockmovement_ProductCardId",
+                schema: "public",
+                table: "stockmovement",
+                column: "ProductCardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_stockmovement_SalesRepresentativeId",
+                schema: "public",
+                table: "stockmovement",
+                column: "SalesRepresentativeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_stockmovement_WarehouseId",
+                schema: "public",
+                table: "stockmovement",
                 column: "WarehouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_warehouse_CityId",
+                schema: "public",
+                table: "warehouse",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_warehouse_CountryId",
+                schema: "public",
+                table: "warehouse",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_warehouse_DistrictId",
+                schema: "public",
+                table: "warehouse",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_warehouse_NeighborhoodId",
+                schema: "public",
+                table: "warehouse",
+                column: "NeighborhoodId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "AspNetRoleClaims",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "AspNetUserClaims",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "AspNetUserLogins",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "AspNetUserRoles",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "AspNetUserTokens",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Files");
+                name: "Files",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "OfferDetails");
+                name: "orderdetail",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
+                name: "proposaldetail",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "StockMovements");
+                name: "stockmovement",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "UnitOfMeasures");
+                name: "unitofmeasure",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "AspNetRoles",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "AspNetUsers",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "order",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "ProductCards");
+                name: "productcard",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Warehouses");
+                name: "warehouse",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Offer");
+                name: "proposal",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "category",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Machines");
+                name: "machines",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "ModelTypes");
+                name: "modeltype",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Pallets");
+                name: "pallet",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "OfferMeetings");
+                name: "paymenttype",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "PaymentTypes");
+                name: "proposalmeeting",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "SalesTypes");
+                name: "salestype",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "ShippingAddresses");
+                name: "shippingaddress",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "VehicleTypes");
+                name: "vehicletype",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "SalesRepresentatives");
+                name: "salesrepresentative",
+                schema: "public");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "customer",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "neighborhoods",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "districts",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "cities",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "countries",
+                schema: "public");
         }
     }
 }

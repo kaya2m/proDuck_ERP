@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.OfferDetail.GetAllOfferDetail
+namespace proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetAllProposalDetail
 {
-    public class GetAllOfferDetailQueryResponse : ResponseDto<GetAllOfferDetailQueryResponse>
+    public class GetAllProposalDetailQueryResponse : ResponseDto<GetAllProposalDetailQueryResponse>
     {
         public int TotalCount { get; set; }
     }

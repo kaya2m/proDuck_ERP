@@ -1,13 +1,13 @@
-﻿using proDuck.Domain.Entities.Offer;
+﻿using proDuck.Domain.Entities.Proposal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface
+namespace proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface
 {
-    public interface IOfferDetailReadRepository :IReadRepository<TBL_OfferDetails>
+    public interface IProposalDetailReadRepository :IReadRepository<TBL_ProposalDetails>
     {
     }
 }

@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 
-namespace proDuck.Application.Features.Commands.Offer.Meeting.UpdateMeeting
+namespace proDuck.Application.Features.Commands.Proposal.Meeting.UpdateMeeting
 {
     public class UpdateMeetingCommandHandler : IRequestHandler<UpdateMeetingCommandRequest, UpdateMeetingCommandResponse>
     {
@@ -21,7 +21,7 @@ namespace proDuck.Application.Features.Commands.Offer.Meeting.UpdateMeeting
         {
             try
             {
-                TBL_OfferMeeting meeting = await _meetingReadRepository.GetByIdAsync(request.id);
+                TBL_ProposalMeeting meeting = await _meetingReadRepository.GetByIdAsync(request.id);
 
                 if (meeting == null)
                 {

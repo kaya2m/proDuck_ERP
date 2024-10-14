@@ -1,5 +1,5 @@
-﻿using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Domain.Entities.Offer;
+﻿using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Persistence.Context;
 using proDuck.Persistence.Repositories;
 using System;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Presistence.Repositories.OffersRepositories.MeetingRepositories
+namespace proDuck.Presistence.Repositories.ProposalsRepositories.MeetingRepositories
 {
-    public class MeetingReadRepository : ReadRepository<TBL_OfferMeeting>, IMeetingReadRepository
+    public class MeetingReadRepository : ReadRepository<TBL_ProposalMeeting>, IMeetingReadRepository
     {
         public MeetingReadRepository(proDuckDbContext dbContext) : base(dbContext)
         {

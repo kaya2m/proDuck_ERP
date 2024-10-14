@@ -1,61 +1,61 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.UpdateOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.UpdateProposalDetail
 {
-    public class UpdateOfferDetailCommandHandler : IRequestHandler<UpdateOfferDetailCommandRequest, UpdateOfferDetailCommandResponse>
+    public class UpdateProposalDetailCommandHandler : IRequestHandler<UpdateProposalDetailCommandRequest, UpdateProposalDetailCommandResponse>
     {
-        private readonly IOfferDetailReadRepository _offerDetailReadRepository;
-        private readonly IOfferDetailWriteRepository _offerDetailWriteRepository;
+        private readonly IProposalDetailReadRepository _ProposalDetailReadRepository;
+        private readonly IProposalDetailWriteRepository _ProposalDetailWriteRepository;
 
-        public UpdateOfferDetailCommandHandler(IOfferDetailReadRepository offerDetailReadRepository, IOfferDetailWriteRepository offerDetailWriteRepository)
+        public UpdateProposalDetailCommandHandler(IProposalDetailReadRepository ProposalDetailReadRepository, IProposalDetailWriteRepository ProposalDetailWriteRepository)
         {
-            _offerDetailReadRepository = offerDetailReadRepository;
-            _offerDetailWriteRepository = offerDetailWriteRepository;
+            _ProposalDetailReadRepository = ProposalDetailReadRepository;
+            _ProposalDetailWriteRepository = ProposalDetailWriteRepository;
         }
 
-        public async Task<UpdateOfferDetailCommandResponse> Handle(UpdateOfferDetailCommandRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateProposalDetailCommandResponse> Handle(UpdateProposalDetailCommandRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var offerDetail = await _offerDetailReadRepository.GetByIdAsync(request.id);
+                var ProposalDetail = await _ProposalDetailReadRepository.GetByIdAsync(request.id);
 
-                if (offerDetail == null)
+                if (ProposalDetail == null)
                 {
-                    return new UpdateOfferDetailCommandResponse
+                    return new UpdateProposalDetailCommandResponse
                     {
-                        Message = "Offer Detail not found",
+                        Message = "Proposal Detail not found",
                         IsSuccessful = false,
                         StatusCode = StatusCodes.Status404NotFound,
                     };
                 }
                 else
                 {
-                    offerDetail.SpecialCode = request.SpecialCode;
-                    offerDetail.UnitPrice = request.UnitPrice;
-                    offerDetail.Amount = request.Amount;
-                    offerDetail.Discount = request.Discount;
-                    offerDetail.DiscountedAmount = request.DiscountedAmount;
-                    offerDetail.Quantity = request.Quantity;
-                    offerDetail.Unit = request.Unit;
-                    offerDetail.DeliveryDate = request.DeliveryDate;
-                    offerDetail.Description = request.Description;
-                    offerDetail.Image = request.Image;
-                    offerDetail.Date = request.Date;
-                    offerDetail.OfferId = request.OfferId;
-                    offerDetail.ProductCardId = request.ProductCardId;
+                    ProposalDetail.SpecialCode = request.SpecialCode;
+                    ProposalDetail.UnitPrice = request.UnitPrice;
+                    ProposalDetail.Amount = request.Amount;
+                    ProposalDetail.Discount = request.Discount;
+                    ProposalDetail.DiscountedAmount = request.DiscountedAmount;
+                    ProposalDetail.Quantity = request.Quantity;
+                    ProposalDetail.Unit = request.Unit;
+                    ProposalDetail.DeliveryDate = request.DeliveryDate;
+                    ProposalDetail.Description = request.Description;
+                    ProposalDetail.Image = request.Image;
+                    ProposalDetail.Date = request.Date;
+                    ProposalDetail.ProposalId = request.ProposalId;
+                    ProposalDetail.ProductCardId = request.ProductCardId;
 
-                    _offerDetailWriteRepository.Update(offerDetail);
-                    await _offerDetailWriteRepository.SaveChangesAsync();
-                    return new UpdateOfferDetailCommandResponse
+                    _ProposalDetailWriteRepository.Update(ProposalDetail);
+                    await _ProposalDetailWriteRepository.SaveChangesAsync();
+                    return new UpdateProposalDetailCommandResponse
                     {
-                        Message = "Offer detail updated successfully",
+                        Message = "Proposal detail updated successfully",
                         IsSuccessful = true,
                         StatusCode = StatusCodes.Status200OK
                     };
@@ -64,7 +64,7 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.UpdateOfferDet
             }
             catch (Exception ex)
             {
-                return new UpdateOfferDetailCommandResponse
+                return new UpdateProposalDetailCommandResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

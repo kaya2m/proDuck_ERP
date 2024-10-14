@@ -1,12 +1,14 @@
 ﻿using proDuck.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace proDuck.Domain.Entities.ProductCard
 {
+    [Table("pallet")]
     public class TBL_Pallet : BaseEntity
     {
         public string WarehouseName { get; set; }

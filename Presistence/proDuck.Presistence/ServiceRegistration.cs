@@ -16,12 +16,12 @@ using proDuck.Application.Abstraction.Services.Authentication;
 using proDuck.Presistence.Repositories.CustomerRepositories;
 using proDuck.Application.Repositories.ShippingAddressInterface;
 using proDuck.Presistence.Repositories.ShippingAddressRepositories;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Presistence.Repositories.OffersRepositories.MeetingRepositories;
-using proDuck.Presistence.Repositories.OffersRepositories.OfferDetailRepositories;
-using proDuck.Presistence.Repositories.OffersRepositories.OfferRepositories;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Presistence.Repositories.ProposalsRepositories.MeetingRepositories;
+using proDuck.Presistence.Repositories.ProposalsRepositories.ProposalDetailRepositories;
+using proDuck.Presistence.Repositories.ProposalsRepositories.ProposalRepositories;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
 using proDuck.Application.Repositories.OrderInterface.Order;
 using proDuck.Presistence.Repositories.OrdersRepositories.OrderRepositories;
 using proDuck.Presistence.Repositories.OrdersRepositories.OrderDetailRepositories;
@@ -34,6 +34,8 @@ using proDuck.Application.Repositories.ProductCardInterfaces.CategoryInterface;
 using proDuck.Presistence.Repositories.ProductCardRepositories.ModelTypeRepositories;
 using proDuck.Application.Repositories.ProductCardInterfaces.PalletInterface;
 using proDuck.Application.Repositories.ProductCardInterfaces.ModelTypeInterface;
+using proDuck.Application.Repositories.AddressInterface;
+using proDuck.Presistence.Repositories.AddressRepositories;
 
 namespace proDuck.Persistence
 {
@@ -60,10 +62,10 @@ namespace proDuck.Persistence
             services.AddScoped<IShippingAddressWriteRepository, ShippingAddressWriteRepository>();
             services.AddScoped<IMeetingReadRepository,  MeetingReadRepository>();
             services.AddScoped<IMeetingWriteRepository, MeetingWriteRepository>();
-            services.AddScoped<IOfferReadRepository,  OfferReadRepository>();
-            services.AddScoped<IOfferWriteRepository, OfferWriteRepository>();
-            services.AddScoped<IOfferDetailReadRepository,  OfferDetailReadRepository>();
-            services.AddScoped<IOfferDetailWriteRepository, OfferDetailWriteRepository>();
+            services.AddScoped<IProposalReadRepository,  ProposalReadRepository>();
+            services.AddScoped<IProposalWriteRepository, ProposalWriteRepository>();
+            services.AddScoped<IProposalDetailReadRepository,  ProposalDetailReadRepository>();
+            services.AddScoped<IProposalDetailWriteRepository, ProposalDetailWriteRepository>();
             services.AddScoped<IOrderDetailReadRepository,  OrderDetailReadRepository>();
             services.AddScoped<IOrderDetailWriteRepository, OrderDetailWriteRepository>();
             services.AddScoped<IProductCardReadRepository,  ProductCardReadRepository>();
@@ -81,6 +83,11 @@ namespace proDuck.Persistence
             services.AddScoped<IInvoceFileWriteRepository, InvoiceWriteRepository>();
             services.AddScoped<IProductImageFileReadRepository, ProductImagesReadRepsoitory>();
             services.AddScoped<IProductImageFileWriteRepository, ProductImagesWriteRepsoitory>();
+
+            services.AddScoped<ICountryReadRepository, CountryReadRepository>();
+            services.AddScoped<ICityReadRepository, CityReadRepository>();
+            services.AddScoped<IDistrictReadRepository, DistrictReadRepository>();
+            services.AddScoped<INeighborhoodReadRepository, NeighborhoodReadRepository>();
 
 
             services.AddScoped<IUser, UserService>();

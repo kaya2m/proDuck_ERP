@@ -1,13 +1,13 @@
-﻿using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
-using proDuck.Domain.Entities.Offer;
+﻿using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Persistence.Context;
 using proDuck.Persistence.Repositories;
-namespace proDuck.Presistence.Repositories.OffersRepositories.OfferRepositories
+namespace proDuck.Presistence.Repositories.ProposalsRepositories.ProposalRepositories
 {
-    public class OfferReadRepository : ReadRepository<TBL_Offer>, IOfferReadRepository
+    public class ProposalReadRepository : ReadRepository<TBL_Proposal>, IProposalReadRepository
     {
-        public OfferReadRepository(proDuckDbContext dbContext) : base(dbContext)
+        public ProposalReadRepository(proDuckDbContext dbContext) : base(dbContext)
         {
         }
     }

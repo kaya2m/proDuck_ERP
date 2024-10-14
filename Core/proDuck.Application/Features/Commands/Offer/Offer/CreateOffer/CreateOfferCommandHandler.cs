@@ -1,28 +1,28 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using System;
 
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.CreateOffer;
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.CreateProposal;
 
-public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommandRequest, CreateOfferCommandResponse>
+public class CreateProposalCommandHandler : IRequestHandler<CreateProposalCommandRequest, CreateProposalCommandResponse>
 {
-    private readonly IOfferWriteRepository _offerWriteRepository;
+    private readonly IProposalWriteRepository _ProposalWriteRepository;
 
-    public CreateOfferCommandHandler(IOfferWriteRepository offerWriteRepository)
+    public CreateProposalCommandHandler(IProposalWriteRepository ProposalWriteRepository)
     {
-        _offerWriteRepository = offerWriteRepository;
+        _ProposalWriteRepository = ProposalWriteRepository;
     }
 
-    public async Task<CreateOfferCommandResponse> Handle(CreateOfferCommandRequest request, CancellationToken cancellationToken)
+    public async Task<CreateProposalCommandResponse> Handle(CreateProposalCommandRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            var offer = await _offerWriteRepository.AddAsync(new()
+            var Proposal = await _ProposalWriteRepository.AddAsync(new()
             {
                 Type = request.Type,
-                OfferNumber = request.OfferNumber,
+                ProposalNumber = request.ProposalNumber,
                 CompanyNumber = request.CompanyNumber,
                 PaymentMethod = request.PaymentMethod,
                 PaymentTerm = request.PaymentTerm,
@@ -41,18 +41,18 @@ public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommandReque
                 PaymentTypeId = request.PaymentTypeId,
                 SalesTypeId = request.SalesTypeId
             });
-            await _offerWriteRepository.SaveChangesAsync();
-            return new CreateOfferCommandResponse
+            await _ProposalWriteRepository.SaveChangesAsync();
+            return new CreateProposalCommandResponse
             {
-                Data = offer,
-                Message = "Offer created successfully",
+                Data = Proposal,
+                Message = "Proposal created successfully",
                 IsSuccessful = true,
                 StatusCode = StatusCodes.Status201Created,
             };
         }
         catch (Exception ex)
         {
-            return new CreateOfferCommandResponse
+            return new CreateProposalCommandResponse
             {
                 Message = ex.Message,
                 IsSuccessful = false,

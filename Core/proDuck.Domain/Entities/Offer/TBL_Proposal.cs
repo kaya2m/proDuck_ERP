@@ -4,13 +4,15 @@ using proDuck.Domain.Entities.Order;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace proDuck.Domain.Entities.Offer
+namespace proDuck.Domain.Entities.Proposal
 {
-    public class TBL_Offer : BaseEntity
+    [Table("proposal")]
+    public class TBL_Proposal : BaseEntity
     {
         public string Type { get; set; }
-        public string OfferNumber { get; set; }
+        public string ProposalNumber { get; set; }
         public string CompanyNumber { get; set; }
         public string PaymentMethod { get; set; }
         public int PaymentTerm { get; set; }
@@ -29,7 +31,7 @@ namespace proDuck.Domain.Entities.Offer
         public Guid ShippingAddressId { get; set; }
         public virtual TBL_ShippingAddress ShippingAddress { get; set; }
         public Guid MeetingId { get; set; }
-        public virtual TBL_OfferMeeting Meeting { get; set; }
+        public virtual TBL_ProposalMeeting Meeting { get; set; }
         public Guid SalesRepresentativeId { get; set; }
         public virtual TBL_SalesRepresentative SalesRepresentative { get; set; }
         public Guid VehicleTypeId { get; set; }
@@ -38,6 +40,6 @@ namespace proDuck.Domain.Entities.Offer
         public virtual TBL_PaymentType PaymentType { get; set; }
         public Guid SalesTypeId { get; set; }
         public virtual TBL_SalesType SalesType { get; set; }
-        public virtual ICollection<TBL_OfferDetails> OfferDetails { get; set; }
+        public virtual ICollection<TBL_ProposalDetails> ProposalDetails { get; set; }
     }
 }

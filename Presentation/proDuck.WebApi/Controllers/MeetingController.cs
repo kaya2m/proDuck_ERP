@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using proDuck.Application.Features.Commands.Offer.Meeting.CreateMeeting;
-using proDuck.Application.Features.Commands.Offer.Meeting.DeleteMeeting;
-using proDuck.Application.Features.Commands.Offer.Meeting.UpdateMeeting;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetAllMeeting;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetByIdMetting;
+using proDuck.Application.Features.Commands.Proposal.Meeting.CreateMeeting;
+using proDuck.Application.Features.Commands.Proposal.Meeting.DeleteMeeting;
+using proDuck.Application.Features.Commands.Proposal.Meeting.UpdateMeeting;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetAllMeeting;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetByIdMetting;
 
 namespace proDuck.WebApi.Controllers
 {

@@ -1,6 +1,6 @@
-﻿using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+﻿using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using proDuck.Application.Repositories.OrderInterface;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 using proDuck.Persistence.Context;
 using proDuck.Persistence.Repositories;
@@ -10,11 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Presistence.Repositories.OffersRepositories.OfferRepositories
+namespace proDuck.Presistence.Repositories.ProposalsRepositories.ProposalRepositories
 {
-    public class OfferWriteRepository : WriteRepository<TBL_Offer>, IOfferWriteRepository
+    public class ProposalWriteRepository : WriteRepository<TBL_Proposal>, IProposalWriteRepository
     {
-        public OfferWriteRepository(proDuckDbContext dbContext) : base(dbContext)
+        public ProposalWriteRepository(proDuckDbContext dbContext) : base(dbContext)
         { }
     }
 }

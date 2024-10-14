@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.OfferDetail.GetByIdOfferDetail
+namespace proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetByIdProposalDetail
 {
-    public class GetByIdOfferDetailQueryRequest : IRequest<GetByIdOfferDetailQueryResponse>
+    public class GetByIdProposalDetailQueryRequest : IRequest<GetByIdProposalDetailQueryResponse>
     {
         public Guid id { get; set; }
     }

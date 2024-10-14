@@ -1,60 +1,60 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace proDuck.Application.Features.Commands.Offer.Offer.UpdateOffer;
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.UpdateProposal;
 
-public class UpdateOfferCommandHandler : IRequestHandler<UpdateOfferCommandRequest, UpdateOfferCommandResponse>
+public class UpdateProposalCommandHandler : IRequestHandler<UpdateProposalCommandRequest, UpdateProposalCommandResponse>
 {
-    private readonly IOfferReadRepository _offerReadRepository;
-    private readonly IOfferWriteRepository _offerWriteRepository;
+    private readonly IProposalReadRepository _ProposalReadRepository;
+    private readonly IProposalWriteRepository _ProposalWriteRepository;
 
-    public UpdateOfferCommandHandler(IOfferReadRepository offerReadRepository, IOfferWriteRepository offerWriteRepository)
+    public UpdateProposalCommandHandler(IProposalReadRepository ProposalReadRepository, IProposalWriteRepository ProposalWriteRepository)
     {
-        _offerReadRepository = offerReadRepository;
-        _offerWriteRepository = offerWriteRepository;
+        _ProposalReadRepository = ProposalReadRepository;
+        _ProposalWriteRepository = ProposalWriteRepository;
     }
 
-    public async Task<UpdateOfferCommandResponse> Handle(UpdateOfferCommandRequest request, CancellationToken cancellationToken)
+    public async Task<UpdateProposalCommandResponse> Handle(UpdateProposalCommandRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            var offer = await _offerReadRepository.GetByIdAsync(request.id);
-            if (offer == null)
+            var Proposal = await _ProposalReadRepository.GetByIdAsync(request.id);
+            if (Proposal == null)
             {
-                return new UpdateOfferCommandResponse
+                return new UpdateProposalCommandResponse
                 {
-                    Message = "Offer not found",
+                    Message = "Proposal not found",
                     IsSuccessful = false
                 };
             }
             else
             {
-                offer.Type = request.Type;
-                offer.OfferNumber = request.OfferNumber;
-                offer.CompanyNumber = request.CompanyNumber;
-                offer.PaymentMethod = request.PaymentMethod;
-                offer.PaymentTerm = request.PaymentTerm;
-                offer.ContactPerson = request.ContactPerson;
-                offer.Description = request.Description;
-                offer.Unit = request.Unit;
-                offer.TotalAmount = request.TotalAmount;
-                offer.DiscountedTotalAmount = request.DiscountedTotalAmount;
-                offer.Date = request.Date;
-                offer.CustomerId = request.CustomerId;
-                offer.OrderId = request.OrderId;
-                offer.ShippingAddressId = request.ShippingAddressId;
-                offer.MeetingId = request.MeetingId;
-                offer.SalesRepresentativeId = request.SalesRepresentativeId;
-                offer.VehicleTypeId = request.VehicleTypeId;
-                offer.PaymentTypeId = request.PaymentTypeId;
-                offer.SalesTypeId = request.SalesTypeId;
+                Proposal.Type = request.Type;
+                Proposal.ProposalNumber = request.ProposalNumber;
+                Proposal.CompanyNumber = request.CompanyNumber;
+                Proposal.PaymentMethod = request.PaymentMethod;
+                Proposal.PaymentTerm = request.PaymentTerm;
+                Proposal.ContactPerson = request.ContactPerson;
+                Proposal.Description = request.Description;
+                Proposal.Unit = request.Unit;
+                Proposal.TotalAmount = request.TotalAmount;
+                Proposal.DiscountedTotalAmount = request.DiscountedTotalAmount;
+                Proposal.Date = request.Date;
+                Proposal.CustomerId = request.CustomerId;
+                Proposal.OrderId = request.OrderId;
+                Proposal.ShippingAddressId = request.ShippingAddressId;
+                Proposal.MeetingId = request.MeetingId;
+                Proposal.SalesRepresentativeId = request.SalesRepresentativeId;
+                Proposal.VehicleTypeId = request.VehicleTypeId;
+                Proposal.PaymentTypeId = request.PaymentTypeId;
+                Proposal.SalesTypeId = request.SalesTypeId;
 
-                _offerWriteRepository.Update(offer);
-                await _offerWriteRepository.SaveChangesAsync();
-                return new UpdateOfferCommandResponse
+                _ProposalWriteRepository.Update(Proposal);
+                await _ProposalWriteRepository.SaveChangesAsync();
+                return new UpdateProposalCommandResponse
                 {
-                    Message = "Offer deleted successfully",
+                    Message = "Proposal deleted successfully",
                     IsSuccessful = true,
                     StatusCode = StatusCodes.Status204NoContent
                 };
@@ -62,7 +62,7 @@ public class UpdateOfferCommandHandler : IRequestHandler<UpdateOfferCommandReque
         }
         catch (Exception ex)
         {
-            return new UpdateOfferCommandResponse
+            return new UpdateProposalCommandResponse
             {
                 Message = ex.Message,
                 IsSuccessful = false,

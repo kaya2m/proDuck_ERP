@@ -1,22 +1,24 @@
 ﻿using proDuck.Domain.Entities.Common;
 using proDuck.Domain.Entities.Customer;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.ProductCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proDuck.Domain.Entities.Order
 {
+    [Table("orderdetail")]
     public class TBL_OrderDetails : BaseEntity
     {
         public int OrderSequence { get; set; }
         public Guid CustomerId { get; set; }
         public Guid OrderId { get; set; }
-        public Guid OfferId { get; set; }
-        public Guid OfferDetailId { get; set; }
+        public Guid ProposalId { get; set; }
+        public Guid ProposalDetailId { get; set; }
         public string CustomerOrderNumber { get; set; }
         public string SpecialCode { get; set; }
         public Guid ProductCardId { get; set; }
@@ -47,7 +49,7 @@ namespace proDuck.Domain.Entities.Order
         // Navigation properties
         public TBL_Customer Customer { get; set; }
         public TBL_Order Order { get; set; }
-        public TBL_Offer Offer { get; set; }
+        public TBL_Proposal Proposal { get; set; }
         public TBL_ProductCard ProductCard { get; set; }
         public TBL_ShippingAddress ShippingAddress { get; set; }
     }

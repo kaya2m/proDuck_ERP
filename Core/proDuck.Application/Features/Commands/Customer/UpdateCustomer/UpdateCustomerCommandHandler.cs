@@ -23,10 +23,11 @@ namespace proDuck.Application.Features.Commands.Customer.UpdateCustomer
         public async Task<UpdateCustomerCommandResponse> Handle(UpdateCustomerCommandRequest request, CancellationToken cancellationToken)
         {
 
-            var customer = 
+            var customer =
                 _customerReadRepository.GetByIdAsync(request.Id).Result;
 
-            if (customer == null) {
+            if (customer == null)
+            {
                 return new UpdateCustomerCommandResponse
                 {
                     Message = "Customer not found",
@@ -42,7 +43,8 @@ namespace proDuck.Application.Features.Commands.Customer.UpdateCustomer
                 customer.ContactNumber = request.ContactNumber;
                 customer.CountryId = request.CountryId;
                 customer.CityId = request.CityId;
-                customer.TownId = request.TownId;
+                customer.DistrictId = request.DistrictId;
+                customer.NeighborhoodId = request.NeighborhoodId;
                 customer.CountryCode = request.CountryCode;
                 customer.CompanyName = request.CompanyName;
                 customer.ContactNumber2 = request.ContactNumber2;
@@ -53,8 +55,8 @@ namespace proDuck.Application.Features.Commands.Customer.UpdateCustomer
                 customer.TaxNumber = request.TaxNumber;
                 customer.TaxOffice = request.TaxOffice;
                 customer.Notes = request.Notes;
-                 _customerWriteRepository.Update(customer);
-                var result =await _customerWriteRepository.SaveChangesAsync();
+                _customerWriteRepository.Update(customer);
+                var result = await _customerWriteRepository.SaveChangesAsync();
                 if (result == 200)
                 {
                     return new UpdateCustomerCommandResponse

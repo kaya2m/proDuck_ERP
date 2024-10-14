@@ -1,33 +1,33 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Features.Queries.Offer.Meeting.GetByIdMetting;
-using proDuck.Application.Repositories.OfferInterfaces.MeetingInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
+using proDuck.Application.Features.Queries.Proposal.Meeting.GetByIdMetting;
+using proDuck.Application.Repositories.ProposalInterfaces.MeetingInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.OfferDetail.GetByIdOfferDetail
+namespace proDuck.Application.Features.Queries.Proposal.ProposalDetail.GetByIdProposalDetail
 {
-    public class GetByIdOfferDetailQueryHandler : IRequestHandler<GetByIdOfferDetailQueryRequest, GetByIdOfferDetailQueryResponse>
+    public class GetByIdProposalDetailQueryHandler : IRequestHandler<GetByIdProposalDetailQueryRequest, GetByIdProposalDetailQueryResponse>
     {
-        private readonly IOfferDetailReadRepository _offerDetailReadRepository;
+        private readonly IProposalDetailReadRepository _ProposalDetailReadRepository;
 
-        public GetByIdOfferDetailQueryHandler(IOfferDetailReadRepository offerDetailReadRepository)
+        public GetByIdProposalDetailQueryHandler(IProposalDetailReadRepository ProposalDetailReadRepository)
         {
-            _offerDetailReadRepository = offerDetailReadRepository;
+            _ProposalDetailReadRepository = ProposalDetailReadRepository;
         }
 
-        public async Task<GetByIdOfferDetailQueryResponse> Handle(GetByIdOfferDetailQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetByIdProposalDetailQueryResponse> Handle(GetByIdProposalDetailQueryRequest request, CancellationToken cancellationToken)
         {
-            var offerDetail = await _offerDetailReadRepository.GetByIdAsync(request.id, false);
-            var isSuccessful = offerDetail != null;
+            var ProposalDetail = await _ProposalDetailReadRepository.GetByIdAsync(request.id, false);
+            var isSuccessful = ProposalDetail != null;
 
-            return new GetByIdOfferDetailQueryResponse
+            return new GetByIdProposalDetailQueryResponse
             {
-                Data = offerDetail,
+                Data = ProposalDetail,
                 IsSuccessful = isSuccessful,
                 StatusCode = isSuccessful ? StatusCodes.Status200OK : StatusCodes.Status404NotFound,
             };

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Features.Queries.Offer.Offer.GetByIdOffer;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Features.Queries.Proposal.Proposal.GetByIdProposal;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using proDuck.Application.Repositories.ProductCardInterfaces.ProductCardInterface;
 using System;
 using System.Collections.Generic;

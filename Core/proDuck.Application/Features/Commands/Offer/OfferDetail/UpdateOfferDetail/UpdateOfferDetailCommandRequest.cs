@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.UpdateOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.UpdateProposalDetail
 {
-    public class UpdateOfferDetailCommandRequest : IRequest<UpdateOfferDetailCommandResponse>
+    public class UpdateProposalDetailCommandRequest : IRequest<UpdateProposalDetailCommandResponse>
     {
         public Guid id { get; set; }
         public string StockNumber { get; set; }
@@ -25,6 +25,6 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.UpdateOfferDet
         public DateTime Date { get; set; }
 
         public Guid ProductCardId { get; set; }
-        public Guid OfferId { get; set; }
+        public Guid ProposalId { get; set; }
     }
 }

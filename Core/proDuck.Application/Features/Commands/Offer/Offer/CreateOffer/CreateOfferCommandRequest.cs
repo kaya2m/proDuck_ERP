@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using proDuck.Domain.Entities.Customer;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 using proDuck.Domain.Entities.SalesRepresentative;
 using System;
@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.CreateOffer
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.CreateProposal
 {
-    public class CreateOfferCommandRequest : IRequest<CreateOfferCommandResponse>
+    public class CreateProposalCommandRequest : IRequest<CreateProposalCommandResponse>
     {
         public string   Type { get; set; }
-        public string   OfferNumber { get; set; }
+        public string   ProposalNumber { get; set; }
         public string   CompanyNumber { get; set; }
         public string   PaymentMethod { get; set; }
         public int      PaymentTerm { get; set; }

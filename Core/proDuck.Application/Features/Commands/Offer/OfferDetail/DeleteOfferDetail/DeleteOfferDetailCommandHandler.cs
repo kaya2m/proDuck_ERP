@@ -1,45 +1,45 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.DeleteOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.DeleteProposalDetail
 {
-    public class DeleteOfferDetailCommandHandler : IRequestHandler<DeleteOfferDetailCommandRequest, DeleteOfferDetailCommandResponse>
+    public class DeleteProposalDetailCommandHandler : IRequestHandler<DeleteProposalDetailCommandRequest, DeleteProposalDetailCommandResponse>
     {
-        private readonly IOfferDetailReadRepository _offerDetailReadRepository;
-        private readonly IOfferDetailWriteRepository _offerDetailWriteRepository;
+        private readonly IProposalDetailReadRepository _ProposalDetailReadRepository;
+        private readonly IProposalDetailWriteRepository _ProposalDetailWriteRepository;
 
-        public DeleteOfferDetailCommandHandler(IOfferDetailWriteRepository offerDetailWriteRepository)
+        public DeleteProposalDetailCommandHandler(IProposalDetailWriteRepository ProposalDetailWriteRepository)
         {
-            _offerDetailWriteRepository = offerDetailWriteRepository;
+            _ProposalDetailWriteRepository = ProposalDetailWriteRepository;
         }
 
-        public async Task<DeleteOfferDetailCommandResponse> Handle(DeleteOfferDetailCommandRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteProposalDetailCommandResponse> Handle(DeleteProposalDetailCommandRequest request, CancellationToken cancellationToken)
         {
 
             try
             {
-                var offerDetail = await _offerDetailReadRepository.GetByIdAsync(request.id);
-                if (offerDetail == null)
+                var ProposalDetail = await _ProposalDetailReadRepository.GetByIdAsync(request.id);
+                if (ProposalDetail == null)
                 {
-                    return new DeleteOfferDetailCommandResponse
+                    return new DeleteProposalDetailCommandResponse
                     {
-                        Message = "Offer Detail not found",
+                        Message = "Proposal Detail not found",
                         IsSuccessful = false,
                         StatusCode = StatusCodes.Status404NotFound,
                     };
                 }
                 else
                 {
-                    offerDetail.Status = false;
-                    _offerDetailWriteRepository.Update(offerDetail);
-                    await _offerDetailWriteRepository.SaveChangesAsync();
-                    return new DeleteOfferDetailCommandResponse
+                    ProposalDetail.Status = false;
+                    _ProposalDetailWriteRepository.Update(ProposalDetail);
+                    await _ProposalDetailWriteRepository.SaveChangesAsync();
+                    return new DeleteProposalDetailCommandResponse
                     {
                         IsSuccessful = true,
                         StatusCode = StatusCodes.Status200OK
@@ -49,7 +49,7 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.DeleteOfferDet
             }
             catch (Exception ex)
             {
-                return new DeleteOfferDetailCommandResponse
+                return new DeleteProposalDetailCommandResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

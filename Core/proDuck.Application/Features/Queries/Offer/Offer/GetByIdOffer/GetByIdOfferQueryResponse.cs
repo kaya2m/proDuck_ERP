@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.Offer.GetByIdOffer
+namespace proDuck.Application.Features.Queries.Proposal.Proposal.GetByIdProposal
 {
-    public class GetByIdOfferQueryResponse:ResponseDto<GetByIdOfferQueryResponse>
+    public class GetByIdProposalQueryResponse:ResponseDto<GetByIdProposalQueryResponse>
     {
     }
 }

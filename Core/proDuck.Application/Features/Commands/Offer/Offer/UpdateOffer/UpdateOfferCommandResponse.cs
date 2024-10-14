@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Offer.UpdateOffer
+namespace proDuck.Application.Features.Commands.Proposal.Proposal.UpdateProposal
 {
-    public class UpdateOfferCommandResponse : ResponseDto<UpdateOfferCommandResponse>
+    public class UpdateProposalCommandResponse : ResponseDto<UpdateProposalCommandResponse>
     {
     }
 }

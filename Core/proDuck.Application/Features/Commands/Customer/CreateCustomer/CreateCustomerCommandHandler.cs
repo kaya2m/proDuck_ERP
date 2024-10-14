@@ -35,7 +35,8 @@ namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
                 ContactNumber = request.ContactNumber,
                 CountryId = request.CountryId,
                 CityId = request.CityId,
-                TownId = request.TownId,
+                DistrictId = request.DistrictId,
+                NeighborhoodId = request.NeighborhoodId,
                 CountryCode = request.CountryCode,
                 Code = await GenerateCustomerCodeAsync(request.CompanyName),
                 CompanyName = request.CompanyName,
@@ -81,17 +82,16 @@ namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
 
             var lastCustomer = await _customerReadRepository
                 .GetWhere(c => c.Code.StartsWith(prefix))
-                .OrderByDescending(c => c.Code)
-                .FirstOrDefaultAsync();
+                .OrderByDescending(c => c.Code).ToListAsync();
 
             int newCodeNumber = 1;
 
             if (lastCustomer != null)
             {
-                var numericPart = lastCustomer.Code.Substring(prefix.Length);
-                if (int.TryParse(numericPart, out int lastNumber))
+                var numericPart = lastCustomer.Count();
+                if (numericPart<0)
                 {
-                    newCodeNumber = lastNumber + 1;
+                    newCodeNumber = numericPart+1;
                 }
             }
             return $"CUS-{newCodeNumber:D5}";

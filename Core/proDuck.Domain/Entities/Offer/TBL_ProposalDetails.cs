@@ -1,10 +1,12 @@
 ﻿using proDuck.Domain.Entities.Common;
 using proDuck.Domain.Entities.ProductCard;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace proDuck.Domain.Entities.Offer
+namespace proDuck.Domain.Entities.Proposal
 {
-    public class TBL_OfferDetails : BaseEntity
+    [Table("proposaldetail")]
+    public class TBL_ProposalDetails : BaseEntity
     {
         public string SpecialCode { get; set; }
         public decimal UnitPrice { get; set; }
@@ -19,8 +21,8 @@ namespace proDuck.Domain.Entities.Offer
         public DateTime Date { get; set; }
 
         // Navigation properties
-        public Guid OfferId { get; set; }
-        public virtual TBL_Offer Offer { get; set; }
+        public Guid ProposalId { get; set; }
+        public virtual TBL_Proposal Proposal { get; set; }
 
         public Guid ProductCardId { get; set; }
         public virtual TBL_ProductCard ProductCard { get; set; }

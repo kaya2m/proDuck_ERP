@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.ProductCard;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.CreateProposalDetail
 {
-    public class CreateOfferDetailCommandRequest : IRequest<CreateOfferDetailCommandResponse>
+    public class CreateProposalDetailCommandRequest : IRequest<CreateProposalDetailCommandResponse>
     {
         public string SpecialCode { get; set; }
         public decimal UnitPrice { get; set; }
@@ -23,7 +23,7 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDet
         public string Image { get; set; }
         public DateTime Date { get; set; }
 
-        public Guid OfferId { get; set; }
+        public Guid ProposalId { get; set; }
         public Guid ProductCardId { get; set; }
     }
 }

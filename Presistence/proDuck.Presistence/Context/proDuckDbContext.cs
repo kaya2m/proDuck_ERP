@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using proDuck.Domain.Entities.Customer;
-using proDuck.Domain.Entities.Offer;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Domain.Entities.Order;
 using proDuck.Domain.Entities.ProductCard;
 using proDuck.Domain.Entities.SalesRepresentative;
 using proDuck.Domain.Entities.Stock;
 using proDuck.Domain.Entities.Machine;
+using proDuck.Domain.Entities.Address;
+using System.Diagnostics.Metrics;
 
 namespace proDuck.Persistence.Context
 {
@@ -23,9 +25,9 @@ namespace proDuck.Persistence.Context
         public DbSet<TBL_Customer> Customers { get; set; }
         public DbSet<TBL_ShippingAddress> ShippingAddresses { get; set; }
         public DbSet<TBL_Machine> Machines { get; set; }
-        public DbSet<TBL_Offer> Offer { get; set; }
-        public DbSet<TBL_OfferDetails> OfferDetails { get; set; }
-        public DbSet<TBL_OfferMeeting> OfferMeetings { get; set; }
+        public DbSet<TBL_Proposal> Proposal { get; set; }
+        public DbSet<TBL_ProposalDetails> ProposalDetails { get; set; }
+        public DbSet<TBL_ProposalMeeting> ProposalMeetings { get; set; }
         public DbSet<TBL_PaymentType> PaymentTypes { get; set; }
         public DbSet<TBL_SalesType> SalesTypes { get; set; }
         public DbSet<TBL_VehicleType> VehicleTypes { get; set; }
@@ -39,6 +41,9 @@ namespace proDuck.Persistence.Context
         public DbSet<TBL_SalesRepresentative> SalesRepresentatives { get; set; }
         public DbSet<TBL_StockMovement> StockMovements { get; set; }
         public DbSet<TBL_Warehouse> Warehouses { get; set; }
+        public DbSet<TBL_City> Cities { get; set; }
+        public DbSet<TBL_District> Districts { get; set; }
+        public DbSet<TBL_Neighborhood> Neighborhoods { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<BaseEntity>();
@@ -60,30 +65,108 @@ namespace proDuck.Persistence.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TBL_Offer>()
+            modelBuilder.HasDefaultSchema("public");
+            modelBuilder.Entity<TBL_Proposal>()
                 .HasOne(o => o.Order)
-                .WithOne(or => or.Offer)
-                .HasForeignKey<TBL_Order>(or => or.OfferId);
+                .WithOne(or => or.Proposal)
+                .HasForeignKey<TBL_Order>(or => or.ProposalId);
 
-            //modelBuilder.Entity<TBL_Customer>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_ShippingAddress>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Machine>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Offer>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_OfferDetails>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_OfferMeeting>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_PaymentType>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_SalesType>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_VehicleType>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Order>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_OrderDetails>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Category>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_ModelType>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Pallet>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_ProductCard>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_UnitOfMeasure>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_SalesRepresentative>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_StockMovement>().HasQueryFilter(u => !u.Status);
-            //modelBuilder.Entity<TBL_Warehouse>().HasQueryFilter(u => !u.Status);
+            modelBuilder.Entity<TBL_City>()
+               .HasMany(c => c.Districts)
+               .WithOne(d => d.City)
+               .HasForeignKey(d => d.CityId);
+
+            modelBuilder.Entity<TBL_District>()
+                .HasMany(d => d.Neighborhoods)
+                .WithOne(n => n.District)
+                .HasForeignKey(n => n.DistrictId);
+
+            modelBuilder.Entity<TBL_Country>()
+                .HasMany(c => c.Cities)
+                .WithOne(c => c.Country)
+                .HasForeignKey(c => c.CountryId);
+
+            modelBuilder.Entity<TBL_Country>()
+                .HasMany(c => c.Districts)
+                .WithOne(d => d.Country)
+                .HasForeignKey(d => d.CountryId);
+
+            modelBuilder.Entity<TBL_Country>()
+                .HasMany(c => c.Neighborhoods)
+                .WithOne(n => n.Country)
+                .HasForeignKey(n => n.CountryId);
+
+            modelBuilder.Entity<TBL_Customer>()
+                .HasOne(c => c.Country)
+                .WithMany()
+                .HasForeignKey(c => c.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Customer>()
+                .HasOne(c => c.City)
+                .WithMany()
+                .HasForeignKey(c => c.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Customer>()
+                .HasOne(c => c.District)
+                .WithMany()
+                .HasForeignKey(c => c.DistrictId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Customer>()
+                .HasOne(c => c.Neighborhood)
+                .WithMany()
+                .HasForeignKey(c => c.NeighborhoodId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Customer>()
+                .HasOne(c => c.Country)
+                .WithMany()
+                .HasForeignKey(c => c.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_ShippingAddress>()
+                .HasOne(c => c.City)
+                .WithMany()
+                .HasForeignKey(c => c.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_ShippingAddress>()
+                .HasOne(c => c.District)
+                .WithMany()
+                .HasForeignKey(c => c.DistrictId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_ShippingAddress>()
+                .HasOne(c => c.Neighborhood)
+                .WithMany()
+                .HasForeignKey(c => c.NeighborhoodId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Warehouse>()
+                .HasOne(c => c.Country)
+                .WithMany()
+                .HasForeignKey(c => c.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Warehouse>()
+                .HasOne(c => c.City)
+                .WithMany()
+                .HasForeignKey(c => c.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Warehouse>()
+                .HasOne(c => c.District)
+                .WithMany()
+                .HasForeignKey(c => c.DistrictId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TBL_Warehouse>()
+                .HasOne(c => c.Neighborhood)
+                .WithMany()
+                .HasForeignKey(c => c.NeighborhoodId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }

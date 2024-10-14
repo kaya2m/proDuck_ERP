@@ -17,7 +17,8 @@ namespace proDuck.Presistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasDefaultSchema("public")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -44,7 +45,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", "public");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -69,7 +70,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "public");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -91,7 +92,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins", "public");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -106,7 +107,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles", "public");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -125,7 +126,107 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CityId"));
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("cities", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CountryId"));
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CountryDialCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("text");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("countries", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_District", b =>
+                {
+                    b.Property<int>("DistrictId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DistrictId"));
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("DistrictName")
+                        .HasColumnType("text");
+
+                    b.HasKey("DistrictId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("districts", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_Neighborhood", b =>
+                {
+                    b.Property<int>("NeighborhoodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("NeighborhoodId"));
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NeighborhoodName")
+                        .HasColumnType("text");
+
+                    b.HasKey("NeighborhoodId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("neighborhoods", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_Customer", b =>
@@ -140,8 +241,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Address2")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Code")
                         .HasColumnType("text");
@@ -158,11 +259,14 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("CountryCode")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -172,6 +276,9 @@ namespace proDuck.Presistence.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<int>("NeighborhoodId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Notes")
                         .HasColumnType("text");
@@ -191,9 +298,6 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("TaxOffice")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TownId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -208,7 +312,15 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("NeighborhoodId");
+
+                    b.ToTable("customer", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", b =>
@@ -226,14 +338,11 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
@@ -241,8 +350,14 @@ namespace proDuck.Presistence.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("EmailAddress")
                         .HasColumnType("text");
+
+                    b.Property<int>("NeighborhoodId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
@@ -256,9 +371,6 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Telephone2")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TownId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -270,9 +382,17 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("ShippingAddresses");
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("NeighborhoodId");
+
+                    b.ToTable("shippingaddress", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Files", b =>
@@ -309,7 +429,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Files");
+                    b.ToTable("Files", "public");
 
                     b.HasDiscriminator().HasValue("Files");
 
@@ -339,7 +459,7 @@ namespace proDuck.Presistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("AspNetRoles", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Identity.AppUser", b =>
@@ -409,7 +529,7 @@ namespace proDuck.Presistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Machine.TBL_Machine", b =>
@@ -462,329 +582,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Machines");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_Offer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CompanyNumber")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ContactPerson")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("DiscountedTotalAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<Guid>("MeetingId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("OfferNumber")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PaymentMethod")
-                        .HasColumnType("text");
-
-                    b.Property<int>("PaymentTerm")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("PaymentTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SalesRepresentativeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SalesTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ShippingAddressId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("VehicleTypeId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("MeetingId");
-
-                    b.HasIndex("PaymentTypeId");
-
-                    b.HasIndex("SalesRepresentativeId");
-
-                    b.HasIndex("SalesTypeId");
-
-                    b.HasIndex("ShippingAddressId");
-
-                    b.HasIndex("VehicleTypeId");
-
-                    b.ToTable("Offer");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_OfferDetails", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DeliveryDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("DiscountedAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductCardId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("SpecialCode")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OfferId");
-
-                    b.HasIndex("ProductCardId");
-
-                    b.ToTable("OfferDetails");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_OfferMeeting", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CommunicationType")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("CustomerContactEmail")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerContactPerson")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerContactPhone")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CustomerRepresentativeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("CustomerRepresentativeId");
-
-                    b.ToTable("OfferMeetings");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_PaymentType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentTypes");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_SalesType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SalesManager")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SalesTypes");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_VehicleType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<int>("M2")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("M3")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserCreated")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VehicleTypes");
+                    b.ToTable("machines", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Order.TBL_Order", b =>
@@ -817,9 +615,6 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("OrderName")
                         .HasColumnType("text");
 
@@ -828,6 +623,9 @@ namespace proDuck.Presistence.Migrations
 
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("ProposalId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("RepresentativeId")
                         .HasColumnType("uuid");
@@ -872,14 +670,14 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("OfferId")
+                    b.HasIndex("ProposalId")
                         .IsUnique();
 
                     b.HasIndex("RepresentativeId");
 
                     b.HasIndex("TBL_ShippingAddressId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("order", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Order.TBL_OrderDetails", b =>
@@ -933,12 +731,6 @@ namespace proDuck.Presistence.Migrations
                     b.Property<int>("LoadingQuantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("OfferDetailId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
@@ -965,6 +757,12 @@ namespace proDuck.Presistence.Migrations
 
                     b.Property<int>("ProductionQuantity")
                         .HasColumnType("integer");
+
+                    b.Property<Guid>("ProposalDetailId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProposalId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
@@ -1000,15 +798,15 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("OfferId");
-
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductCardId");
 
+                    b.HasIndex("ProposalId");
+
                     b.HasIndex("ShippingAddressId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("orderdetail", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_Category", b =>
@@ -1040,7 +838,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("category", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_ModelType", b =>
@@ -1075,7 +873,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModelTypes");
+                    b.ToTable("modeltype", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_Pallet", b =>
@@ -1119,7 +917,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pallets");
+                    b.ToTable("pallet", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", b =>
@@ -1240,7 +1038,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("VehicleTypeId");
 
-                    b.ToTable("ProductCards");
+                    b.ToTable("productcard", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_UnitOfMeasure", b =>
@@ -1272,7 +1070,329 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasures");
+                    b.ToTable("unitofmeasure", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_PaymentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("paymenttype", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_Proposal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CompanyNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("DiscountedTotalAmount")
+                        .HasColumnType("numeric");
+
+                    b.Property<Guid>("MeetingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PaymentTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("PaymentTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProposalNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("SalesRepresentativeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SalesTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ShippingAddressId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("VehicleTypeId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MeetingId");
+
+                    b.HasIndex("PaymentTypeId");
+
+                    b.HasIndex("SalesRepresentativeId");
+
+                    b.HasIndex("SalesTypeId");
+
+                    b.HasIndex("ShippingAddressId");
+
+                    b.HasIndex("VehicleTypeId");
+
+                    b.ToTable("proposal", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_ProposalDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("DiscountedAmount")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ProductCardId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProposalId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SpecialCode")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductCardId");
+
+                    b.HasIndex("ProposalId");
+
+                    b.ToTable("proposaldetail", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_ProposalMeeting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CommunicationType")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CustomerContactEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerContactPerson")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerContactPhone")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CustomerRepresentativeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("CustomerRepresentativeId");
+
+                    b.ToTable("proposalmeeting", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_SalesType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SalesManager")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("salestype", "public");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_VehicleType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("M2")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("M3")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("vehicletype", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", b =>
@@ -1385,7 +1505,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SalesRepresentatives");
+                    b.ToTable("salesrepresentative", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Stock.TBL_StockMovement", b =>
@@ -1514,7 +1634,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("StockMovements");
+                    b.ToTable("stockmovement", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Stock.TBL_Warehouse", b =>
@@ -1529,8 +1649,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ContactEmail")
                         .HasColumnType("text");
@@ -1541,8 +1661,8 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("ContactPhone")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
@@ -1550,8 +1670,14 @@ namespace proDuck.Presistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Location")
                         .HasColumnType("text");
+
+                    b.Property<int>("NeighborhoodId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("text");
@@ -1573,7 +1699,15 @@ namespace proDuck.Presistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Warehouses");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("NeighborhoodId");
+
+                    b.ToTable("warehouse", "public");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductImageFiles", b =>
@@ -1634,112 +1768,139 @@ namespace proDuck.Presistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_City", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_District", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_City", "City")
+                        .WithMany("Districts")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany("Districts")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_Neighborhood", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany("Neighborhoods")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_District", "District")
+                        .WithMany("Neighborhoods")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("District");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_Customer", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Neighborhood", "Neighborhood")
+                        .WithMany()
+                        .HasForeignKey("NeighborhoodId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("District");
+
+                    b.Navigation("Neighborhood");
+                });
+
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", b =>
                 {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
                         .WithMany("ShippingAddresses")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_Offer", b =>
-                {
-                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
-                        .WithMany("Offer")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_OfferMeeting", "Meeting")
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_District", "District")
                         .WithMany()
-                        .HasForeignKey("MeetingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_PaymentType", "PaymentType")
-                        .WithMany("Offers")
-                        .HasForeignKey("PaymentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Neighborhood", "Neighborhood")
+                        .WithMany()
+                        .HasForeignKey("NeighborhoodId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "SalesRepresentative")
-                        .WithMany("Offers")
-                        .HasForeignKey("SalesRepresentativeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("City");
 
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_SalesType", "SalesType")
-                        .WithMany("Offers")
-                        .HasForeignKey("SalesTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", "ShippingAddress")
-                        .WithMany("Offer")
-                        .HasForeignKey("ShippingAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_VehicleType", "VehicleType")
-                        .WithMany("Offers")
-                        .HasForeignKey("VehicleTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Country");
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Meeting");
+                    b.Navigation("District");
 
-                    b.Navigation("PaymentType");
-
-                    b.Navigation("SalesRepresentative");
-
-                    b.Navigation("SalesType");
-
-                    b.Navigation("ShippingAddress");
-
-                    b.Navigation("VehicleType");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_OfferDetails", b =>
-                {
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_Offer", "Offer")
-                        .WithMany("OfferDetails")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", "ProductCard")
-                        .WithMany("OfferDetails")
-                        .HasForeignKey("ProductCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Offer");
-
-                    b.Navigation("ProductCard");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_OfferMeeting", b =>
-                {
-                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "CustomerRepresentative")
-                        .WithMany()
-                        .HasForeignKey("CustomerRepresentativeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("CustomerRepresentative");
+                    b.Navigation("Neighborhood");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Order.TBL_Order", b =>
@@ -1750,9 +1911,9 @@ namespace proDuck.Presistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_Offer", "Offer")
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_Proposal", "Proposal")
                         .WithOne("Order")
-                        .HasForeignKey("proDuck.Domain.Entities.Order.TBL_Order", "OfferId")
+                        .HasForeignKey("proDuck.Domain.Entities.Order.TBL_Order", "ProposalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1768,7 +1929,7 @@ namespace proDuck.Presistence.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Offer");
+                    b.Navigation("Proposal");
 
                     b.Navigation("Representative");
                 });
@@ -1778,12 +1939,6 @@ namespace proDuck.Presistence.Migrations
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_Offer", "Offer")
-                        .WithMany()
-                        .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1799,6 +1954,12 @@ namespace proDuck.Presistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_Proposal", "Proposal")
+                        .WithMany()
+                        .HasForeignKey("ProposalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", "ShippingAddress")
                         .WithMany()
                         .HasForeignKey("ShippingAddressId")
@@ -1807,11 +1968,11 @@ namespace proDuck.Presistence.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Offer");
-
                     b.Navigation("Order");
 
                     b.Navigation("ProductCard");
+
+                    b.Navigation("Proposal");
 
                     b.Navigation("ShippingAddress");
                 });
@@ -1852,7 +2013,7 @@ namespace proDuck.Presistence.Migrations
                         .WithMany("ProductCards")
                         .HasForeignKey("TBL_CategoryId");
 
-                    b.HasOne("proDuck.Domain.Entities.Offer.TBL_VehicleType", "VehicleType")
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_VehicleType", "VehicleType")
                         .WithMany()
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1869,6 +2030,103 @@ namespace proDuck.Presistence.Migrations
                     b.Navigation("Representative");
 
                     b.Navigation("VehicleType");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_Proposal", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
+                        .WithMany("Proposal")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_ProposalMeeting", "Meeting")
+                        .WithMany()
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_PaymentType", "PaymentType")
+                        .WithMany("Proposals")
+                        .HasForeignKey("PaymentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "SalesRepresentative")
+                        .WithMany("Proposals")
+                        .HasForeignKey("SalesRepresentativeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_SalesType", "SalesType")
+                        .WithMany("Proposals")
+                        .HasForeignKey("SalesTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", "ShippingAddress")
+                        .WithMany("Proposal")
+                        .HasForeignKey("ShippingAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_VehicleType", "VehicleType")
+                        .WithMany("Proposals")
+                        .HasForeignKey("VehicleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Meeting");
+
+                    b.Navigation("PaymentType");
+
+                    b.Navigation("SalesRepresentative");
+
+                    b.Navigation("SalesType");
+
+                    b.Navigation("ShippingAddress");
+
+                    b.Navigation("VehicleType");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_ProposalDetails", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", "ProductCard")
+                        .WithMany("ProposalDetails")
+                        .HasForeignKey("ProductCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Proposal.TBL_Proposal", "Proposal")
+                        .WithMany("ProposalDetails")
+                        .HasForeignKey("ProposalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductCard");
+
+                    b.Navigation("Proposal");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_ProposalMeeting", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Customer.TBL_Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", "CustomerRepresentative")
+                        .WithMany()
+                        .HasForeignKey("CustomerRepresentativeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("CustomerRepresentative");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Stock.TBL_StockMovement", b =>
@@ -1912,42 +2170,74 @@ namespace proDuck.Presistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
+            modelBuilder.Entity("proDuck.Domain.Entities.Stock.TBL_Warehouse", b =>
+                {
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("proDuck.Domain.Entities.Address.TBL_Neighborhood", "Neighborhood")
+                        .WithMany()
+                        .HasForeignKey("NeighborhoodId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("District");
+
+                    b.Navigation("Neighborhood");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_City", b =>
+                {
+                    b.Navigation("Districts");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_Country", b =>
+                {
+                    b.Navigation("Cities");
+
+                    b.Navigation("Districts");
+
+                    b.Navigation("Neighborhoods");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Address.TBL_District", b =>
+                {
+                    b.Navigation("Neighborhoods");
+                });
+
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_Customer", b =>
                 {
-                    b.Navigation("Offer");
-
                     b.Navigation("Orders");
+
+                    b.Navigation("Proposal");
 
                     b.Navigation("ShippingAddresses");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Customer.TBL_ShippingAddress", b =>
                 {
-                    b.Navigation("Offer");
-
                     b.Navigation("Order");
-                });
 
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_Offer", b =>
-                {
-                    b.Navigation("OfferDetails");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_PaymentType", b =>
-                {
-                    b.Navigation("Offers");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_SalesType", b =>
-                {
-                    b.Navigation("Offers");
-                });
-
-            modelBuilder.Entity("proDuck.Domain.Entities.Offer.TBL_VehicleType", b =>
-                {
-                    b.Navigation("Offers");
+                    b.Navigation("Proposal");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_Category", b =>
@@ -1957,16 +2247,38 @@ namespace proDuck.Presistence.Migrations
 
             modelBuilder.Entity("proDuck.Domain.Entities.ProductCard.TBL_ProductCard", b =>
                 {
-                    b.Navigation("OfferDetails");
-
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("ProposalDetails");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_PaymentType", b =>
+                {
+                    b.Navigation("Proposals");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_Proposal", b =>
+                {
+                    b.Navigation("Order");
+
+                    b.Navigation("ProposalDetails");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_SalesType", b =>
+                {
+                    b.Navigation("Proposals");
+                });
+
+            modelBuilder.Entity("proDuck.Domain.Entities.Proposal.TBL_VehicleType", b =>
+                {
+                    b.Navigation("Proposals");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.SalesRepresentative.TBL_SalesRepresentative", b =>
                 {
-                    b.Navigation("Offers");
-
                     b.Navigation("Orders");
+
+                    b.Navigation("Proposals");
                 });
 
             modelBuilder.Entity("proDuck.Domain.Entities.Stock.TBL_Warehouse", b =>

@@ -1,11 +1,11 @@
-﻿using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
-using proDuck.Domain.Entities.Offer;
+﻿using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
+using proDuck.Domain.Entities.Proposal;
 using proDuck.Persistence.Context;
 using proDuck.Persistence.Repositories;
-namespace proDuck.Presistence.Repositories.OffersRepositories.OfferDetailRepositories;
+namespace proDuck.Presistence.Repositories.ProposalsRepositories.ProposalDetailRepositories;
 
-public class OfferDetailWriteRepository : WriteRepository<TBL_OfferDetails>, IOfferDetailWriteRepository
+public class ProposalDetailWriteRepository : WriteRepository<TBL_ProposalDetails>, IProposalDetailWriteRepository
 {
-    public OfferDetailWriteRepository(proDuckDbContext dbContext) : base(dbContext)
+    public ProposalDetailWriteRepository(proDuckDbContext dbContext) : base(dbContext)
     { }
 }

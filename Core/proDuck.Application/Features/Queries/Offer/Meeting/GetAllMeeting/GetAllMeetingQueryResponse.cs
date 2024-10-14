@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Queries.Offer.Meeting.GetAllMeeting
+namespace proDuck.Application.Features.Queries.Proposal.Meeting.GetAllMeeting
 {
     public class GetAllMeetingQueryResponse : ResponseDto<GetAllMeetingQueryResponse>
     {

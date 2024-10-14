@@ -1,42 +1,42 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using proDuck.Application.Repositories.OfferInterfaces.OfferDetailInterface;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalDetailInterface;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDetail
+namespace proDuck.Application.Features.Commands.Proposal.ProposalDetail.CreateProposalDetail
 {
-    public class CreateOfferDetailCommandHandler : IRequestHandler<CreateOfferDetailCommandRequest, CreateOfferDetailCommandResponse>
+    public class CreateProposalDetailCommandHandler : IRequestHandler<CreateProposalDetailCommandRequest, CreateProposalDetailCommandResponse>
     {
-        private readonly IOfferDetailWriteRepository _offerDetailWriteRepository;
-        private readonly IOfferReadRepository _offerReadRepository;
-        public CreateOfferDetailCommandHandler(IOfferDetailWriteRepository offerDetailWriteRepository, IOfferReadRepository offerReadRepository)
+        private readonly IProposalDetailWriteRepository _ProposalDetailWriteRepository;
+        private readonly IProposalReadRepository _ProposalReadRepository;
+        public CreateProposalDetailCommandHandler(IProposalDetailWriteRepository ProposalDetailWriteRepository, IProposalReadRepository ProposalReadRepository)
         {
-            _offerDetailWriteRepository = offerDetailWriteRepository;
-            _offerReadRepository = offerReadRepository;
+            _ProposalDetailWriteRepository = ProposalDetailWriteRepository;
+            _ProposalReadRepository = ProposalReadRepository;
         }
 
-        public async Task<CreateOfferDetailCommandResponse> Handle(CreateOfferDetailCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CreateProposalDetailCommandResponse> Handle(CreateProposalDetailCommandRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var offer = await _offerReadRepository.GetByIdAsync(request.OfferId);
-                if (offer == null)
+                var Proposal = await _ProposalReadRepository.GetByIdAsync(request.ProposalId);
+                if (Proposal == null)
                 {
-                    return new CreateOfferDetailCommandResponse
+                    return new CreateProposalDetailCommandResponse
                     {
-                        Message = "Offer not found",
+                        Message = "Proposal not found",
                         IsSuccessful = false,
                         StatusCode = StatusCodes.Status404NotFound,
                     };
                 }
                 else
                 {
-                    var offerDetail = await _offerDetailWriteRepository.AddAsync(new()
+                    var ProposalDetail = await _ProposalDetailWriteRepository.AddAsync(new()
                     {
                         SpecialCode = request.SpecialCode,
                         UnitPrice = request.UnitPrice,
@@ -49,14 +49,14 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDet
                         Description = request.Description,
                         Image = request.Image,
                         Date = request.Date,
-                        OfferId = request.OfferId,
+                        ProposalId = request.ProposalId,
                         ProductCardId = request.ProductCardId
                     });
-                    await _offerDetailWriteRepository.SaveChangesAsync();
-                    return new CreateOfferDetailCommandResponse
+                    await _ProposalDetailWriteRepository.SaveChangesAsync();
+                    return new CreateProposalDetailCommandResponse
                     {
-                        Data = offerDetail,
-                        Message = "Offer detail created successfully",
+                        Data = ProposalDetail,
+                        Message = "Proposal detail created successfully",
                         IsSuccessful = true,
                         StatusCode = StatusCodes.Status201Created,
                     };
@@ -64,7 +64,7 @@ namespace proDuck.Application.Features.Commands.Offer.OfferDetail.CreateOfferDet
             }
             catch (Exception ex)
             {
-                return new CreateOfferDetailCommandResponse
+                return new CreateProposalDetailCommandResponse
                 {
                     Message = ex.Message,
                     IsSuccessful = false,

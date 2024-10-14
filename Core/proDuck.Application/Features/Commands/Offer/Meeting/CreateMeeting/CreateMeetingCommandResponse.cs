@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proDuck.Application.Features.Commands.Offer.Meeting.CreateMeeting
+namespace proDuck.Application.Features.Commands.Proposal.Meeting.CreateMeeting
 {
     public class CreateMeetingCommandResponse : ResponseDto<CreateMeetingCommandResponse>
     {

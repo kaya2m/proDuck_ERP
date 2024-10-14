@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using proDuck.Application.Features.Queries.Offer.Offer.GetAllOffer;
-using proDuck.Application.Repositories.OfferInterfaces.OfferInterface;
+using proDuck.Application.Features.Queries.Proposal.Proposal.GetAllProposal;
+using proDuck.Application.Repositories.ProposalInterfaces.ProposalInterface;
 using proDuck.Application.Repositories.ProductCardInterfaces.ProductCardInterface;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace proDuck.Application.Features.Queries.ProductCard.ProductCard.GetAllPro
 
                 var totalCount = await productCards.CountAsync();
 
-                var offerFilters = await productCards
+                var ProposalFilters = await productCards
                     .Skip(request.Page * request.Size)
                     .Take(request.Size)
                     .ToListAsync();
