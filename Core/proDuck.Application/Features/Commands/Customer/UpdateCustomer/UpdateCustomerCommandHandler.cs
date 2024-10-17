@@ -52,6 +52,7 @@ namespace proDuck.Application.Features.Commands.Customer.UpdateCustomer
                 customer.Address2 = request.Address2;
                 customer.PostCode = request.PostCode;
                 customer.PaymentMethod = request.PaymentMethod;
+                customer.CurrencyTypes = request.CurrencyTypes;
                 customer.TaxNumber = request.TaxNumber;
                 customer.TaxOffice = request.TaxOffice;
                 customer.Notes = request.Notes;

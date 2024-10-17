@@ -52,13 +52,13 @@ namespace proDuck.Persistence.Context
             {
                 if (data.State == EntityState.Added)
                 {
-                    data.Entity.CreateDate = DateTime.UtcNow;
+                    data.Entity.CreateDate = DateTime.Now;
                     data.Entity.Status = true;
                     data.Entity.UserCreated = "admin";
                 }
-                else if (data.State == EntityState.Modified)
+                if (data.State == EntityState.Modified)
                 {
-                    data.Entity.UpdatedDate = DateTime.UtcNow;
+                    data.Entity.UpdatedDate = DateTime.Now;
                 }
             }
             return await base.SaveChangesAsync(cancellationToken);

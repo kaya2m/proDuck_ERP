@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using proDuck.Persistence.Context;
@@ -11,9 +12,11 @@ using proDuck.Persistence.Context;
 namespace proDuck.Presistence.Migrations
 {
     [DbContext(typeof(proDuckDbContext))]
-    partial class proDuckDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016134825_CustomerEntityChanged")]
+    partial class CustomerEntityChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

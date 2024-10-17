@@ -25,8 +25,6 @@ namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
 
         public async Task<CreateCustomerCommandResponse> Handle(CreateCustomerCommandRequest request, CancellationToken cancellationToken)
         {
-           var customerCode = await GenerateCustomerCodeAsync(request.CompanyName);
-
             var customer = await _customerWriteRepository.AddAsync(new()
             {
                 Name = request.Name,
@@ -38,16 +36,18 @@ namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
                 DistrictId = request.DistrictId,
                 NeighborhoodId = request.NeighborhoodId,
                 CountryCode = request.CountryCode,
-                Code = await GenerateCustomerCodeAsync(request.CompanyName),
+                Code = await GenerateCustomerCodeAsync(),
                 CompanyName = request.CompanyName,
                 ContactNumber2 = request.ContactNumber2,
                 Email2 = request.Email2,
                 Address2 = request.Address2,
                 PostCode = request.PostCode,
                 PaymentMethod = request.PaymentMethod,
+                CurrencyTypes = request.CurrencyTypes,
                 TaxNumber = request.TaxNumber,
                 TaxOffice = request.TaxOffice,
                 Notes = request.Notes,
+                idNumber =request.idNumber,
 
             });
             if(customer == true)
@@ -72,24 +72,16 @@ namespace proDuck.Application.Features.Commands.Customer.CreateCustomer
             }
       
         }
-        private async Task<string> GenerateCustomerCodeAsync(string customerName)
+        private async Task<string> GenerateCustomerCodeAsync()
         {
-            var prefix = new string(customerName
-                                    .Where(char.IsLetter)
-                                    .Take(3)
-                                    .ToArray())
-                         .ToUpper();
-
-            var lastCustomer = await _customerReadRepository
-                .GetWhere(c => c.Code.StartsWith(prefix))
-                .OrderByDescending(c => c.Code).ToListAsync();
+            var lastCustomer = await _customerReadRepository.GetAll().ToListAsync();
 
             int newCodeNumber = 1;
 
             if (lastCustomer != null)
             {
                 var numericPart = lastCustomer.Count();
-                if (numericPart<0)
+                if (numericPart>0)
                 {
                     newCodeNumber = numericPart+1;
                 }

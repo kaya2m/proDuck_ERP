@@ -12,7 +12,8 @@ public class TBL_Customer : BaseEntity
 {
     public string Code { get; set; }
     public string Name { get; set; }
-    public int PaymentMethod { get; set; }
+    public string PaymentMethod { get; set; }
+    public string CurrencyTypes { get; set; }
     public string CountryCode { get; set; }
     public int CountryId { get; set; }
     public int CityId { get; set; }
